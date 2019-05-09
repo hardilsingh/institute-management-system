@@ -28,6 +28,11 @@ class FeeManager extends Model
     }
 
 
+    public function feereciept() {
+        return $this->hasOne('App\Reciept');
+    }
+
+
     
 
 

@@ -1,35 +1,21 @@
 @extends('layouts.admin')
 @section('content')
 
-<h5 class="display-4">
-    Students
-</h5>
-@if(Session::has('student_enrolled'))
 <div class="row">
-    <div class="col-lg-5">
-        <div class="alert alert-success">{{ session('student_enrolled') }}</div>
+    <div class="col-lg-12">
+        <h5 class="display-4">
+            Results
+        </h5>
     </div>
 </div>
-@endif
 
-@if(Session::has('student_del'))
+
 <div class="row">
-    <div class="col-lg-5">
-        <div class="alert alert-danger">{{ session('student_del') }}</div>
+    <div class="col-lg-12">
+        <h5 class="text-success">Total Results: {{count($students)}}</h5>
     </div>
 </div>
-@endif
 
-@if(Session::has('std_updated'))
-<div class="row">
-    <div class="col-lg-5">
-        <div class="alert alert-success">{{ session('std_updated') }}</div>
-    </div>
-</div>
-@endif
-<div class="col-lg-6">
-
-</div>
 
 <div class="col-lg-12">
     <table class="table table-hover text-capitalize">
@@ -63,16 +49,7 @@
                 <td style="display:flex; justify-content:space-evenly">
                     <a href="{{route('students.edit' , $student->id)}}" class="btn btn-success">Edit</a>
 
-                    {!! Form::model($student , [
-                    'action'=>['StudentsController@destroy' , $student->id],
-                    'method'=>'DELETE',
-                    ]) !!}
-
-                    {!! Form::submit('Delete' , ['class'=>'btn btn-danger']) !!}
-
-                    {!! Form::close() !!}
-
-                    <!-- <a href="{{route('feemanager.edit' , $student->id)}}" class="btn btn-warning">Manage</a> -->
+                    <a href="{{route('feemanager.edit' , $student->feemanager_id->id)}}" class="btn btn-warning">Fee Manager</a>
                 </td>
             </tr>
             @endforeach
@@ -80,7 +57,7 @@
     </table>
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            {{$students->render()}}
+
         </ul>
     </nav>
 </div>

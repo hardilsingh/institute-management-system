@@ -47,12 +47,12 @@ class EnrollmentContoller extends Controller
         $input = $request->all();
         $input['reg_no'] = 'CBA/' . time();
         $enroll = Enrollment::create($input);
-        FeeManager::create([
+        $fee_id = FeeManager::create([
             'enrollment_id'=> $enroll->id,
             'course_id'=> $enroll->course_id,
         ]);
         $request->session()->flash('student_enrolled', 'Student enrollment complete.');
-        return redirect('/students');
+        return redirect('feemanager/'.$fee_id->id.'/edit');
     }
 
     /**

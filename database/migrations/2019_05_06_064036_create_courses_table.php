@@ -19,7 +19,7 @@ class CreateCoursesTable extends Migration
             $table->integer('duration')->unsigned();
             $table->integer('hours')->unsigned();
             $table->integer('fee')->unsigned();
-            $table->string('centre');
+            $table->string('centre_id');
             $table->timestamps();
         });
     }

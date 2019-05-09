@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Enrollment;
-use App\Http\Requests\enrollRequest;
-use App\Batch;
+use App\Enquiry;
 use App\Course;
+use App\Http\Requests\CreateEnquiry;
 
-class StudentsController extends Controller
+class EnquiriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +17,9 @@ class StudentsController extends Controller
     public function index()
     {
         //
-        $students = Enrollment::orderBy('created_at' , 'DESC')->paginate(10);
-        return view('admin.students.index' , compact('students') );
+        $courses = Course::all();
+        $enquiries = Enquiry::orderBy('created_at' , 'DESC')->paginate(10);
+        return view('admin.enquiries.index' , compact(['enquiries' , 'courses']));
     }
 
     /**
@@ -30,6 +30,8 @@ class StudentsController extends Controller
     public function create()
     {
         //
+        $courses = Course::all();
+        return view('admin.enquiries.create' , compact('courses'));
     }
 
     /**
@@ -38,9 +40,12 @@ class StudentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateEnquiry $request)
     {
         //
+        Enquiry::create($request->all());
+        $request->session()->flash('enquiry_created', 'Enquiry created successfully');
+        return redirect('/enquiry');
     }
 
     /**
@@ -52,8 +57,6 @@ class StudentsController extends Controller
     public function show($id)
     {
         //
-        $student = Enrollment::findOrFail($id)->first();
-        return view('admin.students.profile');
     }
 
     /**
@@ -65,10 +68,8 @@ class StudentsController extends Controller
     public function edit($id)
     {
         //
-        $courses = Course::all();
-        $batches = Batch::all();
-        $student = Enrollment::findOrFail($id)->first();
-        return view('admin.students.edit' , compact(['student' ,'courses' , 'batches']));
+        $enquiry = Enquiry::findOrFail($id);
+        return view('admin.enquiries.edit' , compact('enquiry'));
     }
 
     /**
@@ -78,12 +79,12 @@ class StudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(enrollRequest $request, $id)
+    public function update(Request $request, $id)
     {
         //
-        Enrollment::findOrFail($id)->update($request->all());
-        $request->session()->flash('std_updated', 'Student profile updated successfully');
-        return redirect('/students');
+        Enquiry::findOrFail($id)->update($request->all());
+        $request->session()->flash('enq_updated', 'Enquiry updated successfully. Next Follow up date is '. $request->follow_up);
+        return redirect()->back();
     }
 
     /**
@@ -95,8 +96,5 @@ class StudentsController extends Controller
     public function destroy($id)
     {
         //
-        Enrollment::findOrFail($id)->delete();
-        session()->flash('student_del', 'Student profile deleted successfully.');
-        return redirect()->back();
     }
 }

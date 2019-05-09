@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEnrollmentsTable extends Migration
+class CreateEnquiriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,17 @@ class CreateEnrollmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('enrollments', function (Blueprint $table) {
+        Schema::create('enquiries', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('course_id')->unsigned();
-            $table->integer('batch_id')->unsigned();
             $table->string('name');
-            $table->string('father_name');
             $table->string('address');
             $table->string('tel_no');
-            $table->string('gender');
-            $table->string('email');
             $table->string('edu');
-            $table->string('school_name');
-            $table->string('refer_mode');
+            $table->string('follow_up');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->text('remarks')->nullable();
             $table->timestamps();
         });
     }
@@ -37,6 +35,6 @@ class CreateEnrollmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('enrollments');
+        Schema::dropIfExists('enquiries');
     }
 }

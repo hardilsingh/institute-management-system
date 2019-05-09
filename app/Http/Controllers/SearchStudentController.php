@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Enrollment;
-use App\Http\Requests\enrollRequest;
-use App\Batch;
-use App\Course;
+use App\FeeManager;
 
-class StudentsController extends Controller
+class SearchStudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +16,7 @@ class StudentsController extends Controller
     public function index()
     {
         //
-        $students = Enrollment::orderBy('created_at' , 'DESC')->paginate(10);
-        return view('admin.students.index' , compact('students') );
+        return view('admin.search.index');
     }
 
     /**
@@ -52,8 +49,6 @@ class StudentsController extends Controller
     public function show($id)
     {
         //
-        $student = Enrollment::findOrFail($id)->first();
-        return view('admin.students.profile');
     }
 
     /**
@@ -65,10 +60,6 @@ class StudentsController extends Controller
     public function edit($id)
     {
         //
-        $courses = Course::all();
-        $batches = Batch::all();
-        $student = Enrollment::findOrFail($id)->first();
-        return view('admin.students.edit' , compact(['student' ,'courses' , 'batches']));
     }
 
     /**
@@ -78,12 +69,9 @@ class StudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(enrollRequest $request, $id)
+    public function update(Request $request, $id)
     {
         //
-        Enrollment::findOrFail($id)->update($request->all());
-        $request->session()->flash('std_updated', 'Student profile updated successfully');
-        return redirect('/students');
     }
 
     /**
@@ -95,8 +83,16 @@ class StudentsController extends Controller
     public function destroy($id)
     {
         //
-        Enrollment::findOrFail($id)->delete();
-        session()->flash('student_del', 'Student profile deleted successfully.');
-        return redirect()->back();
+    }
+
+
+    public function search(Request $request)
+    {
+        $item = $request->all();
+        $students = Enrollment::where('name', 'like', '%' . $item['search_result'] . '%')
+            ->orWhere('tel_no', 'like', '%' . $item['search_result'] . '%')
+            ->orWhere('reg_no', 'like', '%' . $item['search_result'] . '%')
+            ->get();
+        return view('admin.search.results', compact('students'));
     }
 }

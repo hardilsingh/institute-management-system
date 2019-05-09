@@ -17,7 +17,7 @@ class CoursesController extends Controller
     public function index()
     {
         //
-        $courses = Course::all()->sortByDesc('created_at');
+        $courses = Course::orderBy('created_at' , 'DESC')->paginate(10);
         return view('admin.course.index' , compact('courses'));
     }
 

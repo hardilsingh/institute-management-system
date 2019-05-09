@@ -32,4 +32,9 @@ class Enrollment extends Model
     public function batch() {
         return $this->belongsTo('App\Batch');
     }
+
+
+    public function feemanager_id() {
+        return $this->hasOne('App\FeeManager');
+    }
 }

@@ -17,13 +17,19 @@
     <div class="sidebar-wrapper">
         <ul class="nav">
             <li class="active ">
-                <a href="./dashboard.html">
+                <a href="/admin">
                     <i class="nc-icon nc-bank"></i>
                     <p>Dashboard</p>
                 </a>
             </li>
+            <li class="">
+                <a href="/profile">
+                    <i class="nc-icon nc-bank"></i>
+                    <p>Search Profile</p>
+                </a>
+            </li>
             <li>
-                <a href="./user.html">
+                <a href="/enquiry">
                     <i class="nc-icon nc-single-02"></i>
                     <p>Enquiries</p>
                 </a>

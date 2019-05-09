@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('styles')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css" />
+@endsection
 @section('content')
 <div class="row">
     <div class="col-lg-3 col-md-6 col-sm-6">
@@ -12,8 +15,8 @@
                     </div>
                     <div class="col-7 col-md-8">
                         <div class="numbers">
-                            <p class="card-category">Capacity</p>
-                            <p class="card-title">150GB
+                            <p class="card-category">Students Enrolled</p>
+                            <p class="card-title">{{count($students)}}
                                 <p>
                         </div>
                     </div>
@@ -38,8 +41,8 @@
                     </div>
                     <div class="col-7 col-md-8">
                         <div class="numbers">
-                            <p class="card-category">Revenue</p>
-                            <p class="card-title">$ 1,345
+                            <p class="card-category">Enquiries</p>
+                            <p class="card-title">{{count($enquiries)}}
                                 <p>
                         </div>
                     </div>
@@ -64,8 +67,8 @@
                     </div>
                     <div class="col-7 col-md-8">
                         <div class="numbers">
-                            <p class="card-category">Errors</p>
-                            <p class="card-title">23
+                            <p class="card-category">Courses</p>
+                            <p class="card-title">{{count($courses)}}
                                 <p>
                         </div>
                     </div>
@@ -108,20 +111,8 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div class="card ">
-            <div class="card-header ">
-                <h5 class="card-title">Users Behavior</h5>
-                <p class="card-category">24 Hours performance</p>
-            </div>
-            <div class="card-body ">
-                <canvas id=chartHours width="400" height="100"></canvas>
-            </div>
-            <div class="card-footer ">
-                <hr>
-                <div class="stats">
-                    <i class="fa fa-history"></i> Updated 3 minutes ago
-                </div>
-            </div>
+        <div class="card" style="padding:30px 20px;">
+        {!! $calendar->calendar() !!}
         </div>
     </div>
 </div>
@@ -172,3 +163,9 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
+{!! $calendar->script() !!}
+@stop

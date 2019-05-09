@@ -26,11 +26,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::group(['middleware' => 'admin'], function () {
-    Route::get('/admin', function () {
-        return view('admin.dashboard');
-    });
+    Route::resource('/admin', 'DashboardController');
+    Route::get('/reciept/{id}', 'RecieptController@show');
     Route::resource('/course', 'CoursesController');
     Route::resource('/enroll', 'EnrollmentContoller');
     Route::resource('/students', 'StudentsController');
     Route::resource('/feemanager', 'FeeManagerController');
+    Route::resource('/enquiry', 'EnquiriesController');
+    Route::get('profile/search', 'SearchStudentController@search');
+    Route::resource('/profile', 'SearchStudentController');
 });

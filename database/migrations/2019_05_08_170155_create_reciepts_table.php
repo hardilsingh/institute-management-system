@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFeeManagersTable extends Migration
+class CreateRecieptsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,22 @@ class CreateFeeManagersTable extends Migration
      */
     public function up()
     {
-        Schema::create('fee_managers', function (Blueprint $table) {
+        Schema::create('reciepts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('enrollment_id')->unsigned();
-            $table->integer('course_id')->unsigned();
-            $table->integer('total_fee')->nullable();
-            $table->integer('paid_fee')->nullable();
-            $table->integer('balance')->nullable();
-            $table->integer('discounted_fee')->nullable();
-            $table->integer('discount')->nullable();
-            $table->date('due_date')->nullable();
+            $table->integer('total_fee');
+            $table->integer('fee_manager_id');
+            $table->integer('balance');
+            $table->integer('discount');
+            $table->integer('paid_fee');
+            $table->date('due_date');
             $table->timestamps();
 
 
             $table->foreign('enrollment_id')->references('id')->on('enrollments')->onDelete('cascade');
+
+
+
         });
     }
 
@@ -37,6 +39,6 @@ class CreateFeeManagersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fee_managers');
+        Schema::dropIfExists('reciepts');
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Enrollment;
 use App\FeeManager;
 use App\Http\Requests\UpdateFeeRequest;
+use App\Reciept;
 
 class FeeManagerController extends Controller
 {
@@ -17,7 +18,7 @@ class FeeManagerController extends Controller
     public function index()
     {
         //
-        $fees = FeeManager::all()->sortByDesc('created_at');
+        $fees = FeeManager::orderBy('created_at' , 'DESC')->paginate(10);
         return view('admin.feemanager.index', compact('fees'));
     }
 
@@ -63,7 +64,8 @@ class FeeManagerController extends Controller
     {
         //
         $student = FeeManager::findOrFail($id);
-        return view('admin.feemanager.edit', compact('student'));
+        $feeReciepts = Reciept::where('enrollment_id' , $student->enrollment_id)->get();
+        return view('admin.feemanager.edit', compact(['student' , 'feeReciepts']));
     }
 
     /**
@@ -81,14 +83,23 @@ class FeeManagerController extends Controller
             $input['discounted_fee'] = $input['total_fee'] - $input['discount'];
             $input['balance'] = $input['discounted_fee'] - $input['paid_fee'];
         } else {
-            $input['balance'] = $input['balance'] -$input['paid_fee'];
+            $input['balance'] = $input['balance'] - $input['paid_fee'];
         }
-
-
 
         $update_fee = FeeManager::findOrFail($id);
         $update_fee->update($input);
         $request->session()->flash('fee_updated', 'Fee updated successfully.');
+
+        $create_reciept = new Reciept([
+            'enrollment_id' => $input['enrollment_id'],
+            'total_fee' => $input['total_fee'],
+            'balance' => $input['balance'],
+            'discount' => $input['discount'],
+            'paid_fee' => $input['paid_fee'],
+            'due_date'=>$input['due_date']
+        ]);
+        $update_fee->feereciept()->save($create_reciept);
+
         return redirect('/feemanager');
     }
 

@@ -83,6 +83,11 @@
             @endif
         </tbody>
     </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {{$courses->render()}}
+        </ul>
+    </nav>
 </div>
 
 
