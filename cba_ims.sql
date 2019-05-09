@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2019 at 09:46 AM
+-- Generation Time: May 09, 2019 at 12:54 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.28
 
@@ -79,7 +79,7 @@ CREATE TABLE `courses` (
   `duration` int(10) UNSIGNED NOT NULL,
   `hours` int(10) UNSIGNED NOT NULL,
   `fee` int(10) UNSIGNED NOT NULL,
-  `centre_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `centre_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -89,8 +89,28 @@ CREATE TABLE `courses` (
 --
 
 INSERT INTO `courses` (`id`, `name`, `duration`, `hours`, `fee`, `centre_id`, `created_at`, `updated_at`) VALUES
-(1, 'c language', 30, 2, 2500, '1', '2019-05-07 01:31:13', '2019-05-07 01:31:13'),
-(2, 'PHP', 180, 4, 15000, '1', '2019-05-07 02:03:51', '2019-05-07 02:06:52');
+(1, 'c language', 30, 2, 15000, 2, '2019-05-08 12:34:21', '2019-05-08 12:34:21');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `enquiries`
+--
+
+CREATE TABLE `enquiries` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `course_id` int(10) UNSIGNED DEFAULT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tel_no` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `edu` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `follow_up` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remarks` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -116,13 +136,6 @@ CREATE TABLE `enrollments` (
   `reg_no` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `enrollments`
---
-
-INSERT INTO `enrollments` (`id`, `course_id`, `batch_id`, `name`, `father_name`, `address`, `tel_no`, `gender`, `email`, `edu`, `school_name`, `refer_mode`, `created_at`, `updated_at`, `reg_no`) VALUES
-(14, 2, 2, 'Hardil Singh', 'Kanwaljit singh', '662/7 Mehar chand Road Gurdaspur', '7340910031', 'male', 'hardilsingh87@gmail.com', '+12', 'dps', 'posters', '2019-05-07 02:04:09', '2019-05-07 02:04:09', 'CBA/1557214449');
-
 -- --------------------------------------------------------
 
 --
@@ -137,18 +150,11 @@ CREATE TABLE `fee_managers` (
   `balance` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `course_id` int(11) DEFAULT NULL,
-  `due_date` date DEFAULT NULL,
+  `course_id` int(11) NOT NULL,
+  `discounted_fee` int(11) DEFAULT NULL,
   `discount` int(11) DEFAULT NULL,
-  `discounted_fee` int(11) DEFAULT NULL
+  `due_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `fee_managers`
---
-
-INSERT INTO `fee_managers` (`id`, `enrollment_id`, `total_fee`, `paid_fee`, `balance`, `created_at`, `updated_at`, `course_id`, `due_date`, `discount`, `discounted_fee`) VALUES
-(10, 14, 8000, 6000, 0, '2019-05-07 02:04:09', '2019-05-07 02:04:26', 2, NULL, 2000, 6000);
 
 -- --------------------------------------------------------
 
@@ -174,7 +180,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (5, '2019_05_06_100345_create_enrollments_table', 1),
 (6, '2019_05_06_101316_create_batches_table', 1),
 (7, '2019_05_06_144531_add_reg_number_to_enrollmet_table', 1),
-(8, '2019_05_06_160234_create_fee_managers_table', 1);
+(8, '2019_05_06_160234_create_fee_managers_table', 1),
+(9, '2019_05_07_103540_create_enquiries_table', 1),
+(10, '2019_05_08_170155_create_reciepts_table', 1);
 
 -- --------------------------------------------------------
 
@@ -191,6 +199,25 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `reciepts`
+--
+
+CREATE TABLE `reciepts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `enrollment_id` bigint(20) UNSIGNED NOT NULL,
+  `total_fee` int(11) NOT NULL,
+  `fee_manager_id` int(11) NOT NULL,
+  `balance` int(11) NOT NULL,
+  `discount` int(11) NOT NULL,
+  `paid_fee` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `due_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -202,16 +229,15 @@ CREATE TABLE `users` (
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `is_active` int(11) DEFAULT '0'
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `is_active`) VALUES
-(1, 'Hardil Singh', 'hardilsingh87@gmail.com', NULL, '$2y$10$QFEb0bkzIDG02uDRjqBWN.a/bzuVkxto0zIF4eK.8Gv7GW5swd5/C', NULL, '2019-05-07 01:27:50', '2019-05-07 01:27:50', 0);
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Hardil Singh', 'hardilsingh87@gmail.com', NULL, '$2y$10$FbwQEkYW/bAOEjqChbfF3uXsmKj1nR7N7ynWeTNqtDCpgqGH3u.pC', 'jpiSC7y1bREdTG3YQgHqAmr5ELZr4Ev23TdFnTzn5IdRgTVc6adqCgOTfotx', '2019-05-08 12:32:25', '2019-05-08 12:32:25');
 
 --
 -- Indexes for dumped tables
@@ -233,6 +259,12 @@ ALTER TABLE `centres`
 -- Indexes for table `courses`
 --
 ALTER TABLE `courses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `enquiries`
+--
+ALTER TABLE `enquiries`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -261,6 +293,13 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
+-- Indexes for table `reciepts`
+--
+ALTER TABLE `reciepts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `reciepts_enrollment_id_foreign` (`enrollment_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -287,13 +326,19 @@ ALTER TABLE `centres`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `enquiries`
+--
+ALTER TABLE `enquiries`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `enrollments`
 --
 ALTER TABLE `enrollments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `fee_managers`
@@ -305,7 +350,13 @@ ALTER TABLE `fee_managers`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `reciepts`
+--
+ALTER TABLE `reciepts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -322,6 +373,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `fee_managers`
   ADD CONSTRAINT `fee_managers_enrollment_id_foreign` FOREIGN KEY (`enrollment_id`) REFERENCES `enrollments` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `reciepts`
+--
+ALTER TABLE `reciepts`
+  ADD CONSTRAINT `reciepts_enrollment_id_foreign` FOREIGN KEY (`enrollment_id`) REFERENCES `enrollments` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
