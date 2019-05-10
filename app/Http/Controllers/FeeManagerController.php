@@ -60,10 +60,10 @@ class FeeManagerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
         //
-        $student = FeeManager::findOrFail($id);
+        $student = FeeManager::where('slug' , $slug)->first();
         $feeReciepts = Reciept::where('enrollment_id' , $student->enrollment_id)->get();
         return view('admin.feemanager.edit', compact(['student' , 'feeReciepts']));
     }

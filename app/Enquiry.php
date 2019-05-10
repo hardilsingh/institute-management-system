@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Enquiry extends Model
 {
     //
+    use Sluggable;
     protected $fillable = [
         'name',
         'course_id',
@@ -18,6 +20,17 @@ class Enquiry extends Model
         'start_date',
         'end_date'
     ];
+
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name',
+                'onUpdate'=> true,
+            ]
+        ];
+    }
 
 
     public function course() {

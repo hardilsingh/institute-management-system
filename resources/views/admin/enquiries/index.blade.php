@@ -3,10 +3,9 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h5 class="display-4">
+        <h6 class="display-4">
             Enquiries
-
-        </h5>
+        </h6>
     </div>
 </div>
 
@@ -71,7 +70,7 @@
                 <td>{{$enquiry->follow_up}}</td>
                 <td>{{substr($enquiry->remarks , 0 , 30)}}</td>
                 <td style="display:flex; justify-content:space-evenly">
-                    <a href="{{route('enquiry.edit' , $enquiry->id)}}" class="btn btn-success">View</a>
+                    <a href="{{route('enquiry.edit' , $enquiry->slug)}}" class="btn btn-success">View</a>
                 </td>
             </tr>
             @endforeach

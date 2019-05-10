@@ -2,13 +2,13 @@
     <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
-    <div class="logo">
+    <div class="logo myDIV">
         <!-- <a href="http://www.creative-tim.com" class="simple-text logo-mini">
             <div class="logo-image-small">
                 <img src="/img/logo.png">
             </div>
         </a> -->
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+        <a href="http://cbainfotech.com" class="simple-text logo-normal">
             <div class="logo-image-big">
             <img src="/img/logo.png">
           </div> 
@@ -16,7 +16,7 @@
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
-            <li class="active ">
+            <li>
                 <a href="/admin">
                     <i class="nc-icon nc-bank"></i>
                     <p>Dashboard</p>

@@ -62,12 +62,12 @@ class StudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
         //
         $courses = Course::all();
         $batches = Batch::all();
-        $student = Enrollment::findOrFail($id)->first();
+        $student = Enrollment::where('slug' , $slug)->first();
         return view('admin.students.edit' , compact(['student' ,'courses' , 'batches']));
     }
 

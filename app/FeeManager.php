@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class FeeManager extends Model
 {
@@ -15,8 +16,23 @@ class FeeManager extends Model
         'course_id',
         'due_date',
         'discount',
-        'discounted_fee'
+        'discounted_fee',
+        'slug'
     ];
+
+    use Sluggable;
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name',
+                'onUpdate'=> true,
+            ]
+        ];
+    }
+
+
 
 
     public function course() {

@@ -58,7 +58,7 @@
                 </td>
                 <td>{{$fee->due_date}}</td>
                 <td style="display:flex; justify-content:space-evenly">
-                    <a href="{{route('feemanager.edit' , $fee->id)}}" class="btn btn-success">Manage</a>
+                    <a href="{{route('feemanager.edit' , $fee->slug)}}" class="btn btn-success">Manage</a>
                 </td>
             </tr>
             @endforeach

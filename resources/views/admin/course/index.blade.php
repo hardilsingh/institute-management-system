@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 @section('content')
 
-<h2 class="display-4">
+<h6 class="display-4">
     Courses
-</h2>
+</h6>
 
 @if(Session::has('course_created'))
 <div class="col-lg-6">
@@ -74,7 +74,7 @@
                     {!! Form::close() !!}
 
                 </td>
-                <td><a href="{{route('course.edit' , $course->id)}}" class="btn btn-secondary">Edit</a></td>
+                <td><a href="{{route('course.edit' , $course->slug)}}" class="btn btn-secondary">Edit</a></td>
 
 
             </tr>

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Enrollment extends Model
 {
@@ -25,16 +26,31 @@ class Enrollment extends Model
 
     ];
 
-    public function course() {
+    use Sluggable;
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name',
+                'onUpdate'=> true,
+            ]
+        ];
+    }
+
+    public function course()
+    {
         return $this->belongsTo('App\Course');
     }
 
-    public function batch() {
+    public function batch()
+    {
         return $this->belongsTo('App\Batch');
     }
 
 
-    public function feemanager_id() {
+    public function feemanager_id()
+    {
         return $this->hasOne('App\FeeManager');
     }
 }

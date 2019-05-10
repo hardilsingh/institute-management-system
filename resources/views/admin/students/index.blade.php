@@ -61,7 +61,7 @@
                 <td>{{$student->tel_no}}</td>
                 <td>{{$student->reg_no}}</td>
                 <td style="display:flex; justify-content:space-evenly">
-                    <a href="{{route('students.edit' , $student->id)}}" class="btn btn-success">Edit</a>
+                    <a href="{{route('students.edit' , $student->slug)}}" class="btn btn-success">Edit</a>
 
                     {!! Form::model($student , [
                     'action'=>['StudentsController@destroy' , $student->id],

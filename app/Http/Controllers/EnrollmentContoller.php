@@ -50,9 +50,10 @@ class EnrollmentContoller extends Controller
         $fee_id = FeeManager::create([
             'enrollment_id'=> $enroll->id,
             'course_id'=> $enroll->course_id,
+            'slug'=>$enroll->slug,
         ]);
         $request->session()->flash('student_enrolled', 'Student enrollment complete.');
-        return redirect('feemanager/'.$fee_id->id.'/edit');
+        return redirect('feemanager/'.$fee_id->slug.'/edit');
     }
 
     /**

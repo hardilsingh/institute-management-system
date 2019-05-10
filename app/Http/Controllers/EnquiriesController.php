@@ -65,10 +65,10 @@ class EnquiriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
         //
-        $enquiry = Enquiry::findOrFail($id);
+        $enquiry = Enquiry::where('slug' , $slug)->first();
         return view('admin.enquiries.edit' , compact('enquiry'));
     }
 

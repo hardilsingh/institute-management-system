@@ -64,11 +64,11 @@ class CoursesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
         //
         $centres = Centre::pluck('name' , 'id');
-        $course = Course::findOrFail($id);
+        $course = Course::where('slug' , $slug)->first();
         return view('admin.course.edit' , compact('course') , compact('centres'));
     }
 
