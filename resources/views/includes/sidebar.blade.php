@@ -18,13 +18,13 @@
         <ul class="nav">
             <li>
                 <a href="/admin">
-                    <i class="nc-icon nc-bank"></i>
+                    <i class="fas fa-user-shield"></i>
                     <p>Dashboard</p>
                 </a>
             </li>
             <li class="">
                 <a href="/profile">
-                    <i class="nc-icon nc-bank"></i>
+                    <i class="fas fa-user-circle"></i>
                     <p>Search Profile</p>
                 </a>
             </li>
@@ -36,31 +36,31 @@
             </li>
             <li>
                 <a href="/enquiry">
-                    <i class="nc-icon nc-single-02"></i>
+                    <i class="fas fa-question"></i>
                     <p>Enquiries</p>
                 </a>
             </li>
             <li>
                 <a href="/students">
-                    <i class="nc-icon nc-diamond"></i>
+                    <i class="fas fa-user-graduate"></i>
                     <p>Students</p>
                 </a>
             </li>
             <li>
                 <a href="{{route('course.index')}}">
-                    <i class="nc-icon nc-pin-3"></i>
+                    <i class="fas fa-book"></i>
                     <p>Courses</p>
                 </a>
             </li>
             <li>
                 <a href="/feemanager">
-                    <i class="nc-icon nc-bell-55"></i>
+                    <i class="fas fa-rupee-sign"></i>
                     <p>Fee Manager</p>
                 </a>
             </li>
             <li>
                 <a href="/enroll">
-                    <i class="nc-icon nc-single-02"></i>
+                    <i class="fas fa-signature"></i>
                     <p>Enrollment Form</p>
                 </a>
             </li>
