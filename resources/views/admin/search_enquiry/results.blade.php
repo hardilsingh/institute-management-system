@@ -3,35 +3,19 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h6 class="display-4">
-            Enquiries
-        </h6>
+        <h5 class="display-4">
+            Results
+        </h5>
     </div>
 </div>
+
 
 <div class="row">
     <div class="col-lg-12">
-        <a href="{{route('enquiry.create')}}" class="btn btn-primary btn-lg">Create</a>
+        <h5 class="text-success">Total Results: {{count($enquiries)}}</h5>
     </div>
 </div>
 
-
-
-@if(Session::has('enquiry_followed_up'))
-<div class="row">
-    <div class="col-lg-5">
-        <div class="alert alert-success">{{ session('enquiry_followed_up') }}</div>
-    </div>
-</div>
-@endif
-
-@if(Session::has('enquiry_created'))
-<div class="row">
-    <div class="col-lg-5">
-        <div class="alert alert-success">{{ session('enquiry_created') }}</div>
-    </div>
-</div>
-@endif
 
 <div class="col-lg-12">
     <table class="table table-hover text-capitalize">
@@ -101,7 +85,7 @@
     </table>
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            {{$enquiries->render()}}
+
         </ul>
     </nav>
 </div>

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateEnquiry extends FormRequest
+class SearchStudent extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,15 +25,7 @@ class CreateEnquiry extends FormRequest
     {
         return [
             //
-            'name'=>'required',
-            'tel_no'=>'required',
-            'address'=>'required',
-            'follow_up'=>'required',
-            'edu'=>'required',
-            'father_name'=>'required',
-            'gender'=>'required',
-            'school_name'=>'required',
-            'batch_id'=>'required',
+            'search_result',
         ];
     }
 }

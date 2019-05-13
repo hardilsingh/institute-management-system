@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Enrollment;
 use App\FeeManager;
+use App\Http\Requests\SearchStudent;
 
 class SearchStudentController extends Controller
 {
@@ -85,8 +86,7 @@ class SearchStudentController extends Controller
         //
     }
 
-
-    public function search(Request $request)
+    public function search(SearchStudent $request)
     {
         $item = $request->all();
         $students = Enrollment::where('name', 'like', '%' . $item['search_result'] . '%')

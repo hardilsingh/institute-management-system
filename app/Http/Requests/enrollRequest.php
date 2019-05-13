@@ -32,10 +32,8 @@ class enrollRequest extends FormRequest
             'address'=>'required',
             'tel_no'=>'required',
             'gender'=>'required',
-            'email'=>'required',
             'edu'=>'required',
             'school_name'=>'required',
-            'refer_mode'=>'required',
         ];
     }
 }

@@ -96,15 +96,14 @@
                 </select>
             </div>
         </div>
+
+
         <div class="col-lg-4">
             <div class="form-group">
-                <label for="">How did you hear about us:</label>
-                <select name="refer_mode" id="" class="form-control">
-                    <option value="ad">Newspaper Ad</option>
-                    <option value="posters">Other form of advertiesment</option>
-                    <option value="friends">Friends/OldStudents</option>
-                    <option value="other">Other</option>
-                </select>
+                @if($student->course->centre_id == 2)
+                <label for="">CDAC registration no:</label>
+                {!! Form::text('reg_no' , null , ['class'=>'form-control']) !!}
+                @endif
             </div>
         </div>
     </div>

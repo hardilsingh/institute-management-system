@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Enquiry;
 use App\Course;
 use App\Http\Requests\CreateEnquiry;
+use App\Batch;
 
 class EnquiriesController extends Controller
 {
@@ -17,6 +18,7 @@ class EnquiriesController extends Controller
     public function index()
     {
         //
+        
         $courses = Course::all();
         $enquiries = Enquiry::orderBy('created_at' , 'DESC')->paginate(10);
         return view('admin.enquiries.index' , compact(['enquiries' , 'courses']));
@@ -30,8 +32,9 @@ class EnquiriesController extends Controller
     public function create()
     {
         //
+        $batches = Batch::all();
         $courses = Course::all();
-        return view('admin.enquiries.create' , compact('courses'));
+        return view('admin.enquiries.create' , compact(['courses' , 'batches']));
     }
 
     /**

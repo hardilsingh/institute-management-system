@@ -21,6 +21,12 @@
                         document.write(new Date().getFullYear())
                     </script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
                 </span>
+                <span class="copyright">
+                    ©
+                    <script>
+                        document.write(new Date().getFullYear())
+                    </script>, developed by <i class="fa fa-heart heart"></i> Hardil Singh
+                </span>
             </div>
         </div>
     </div>

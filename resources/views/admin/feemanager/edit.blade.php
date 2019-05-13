@@ -38,6 +38,10 @@
                         <td>{{$student->student->name}}</td>
                     </tr>
                     <tr>
+                        <td>Telephone:</td>
+                        <td>{{$student->student->tel_no}}</td>
+                    </tr>
+                    <tr>
                         <td>Reg No:</td>
                         <td>{{$student->student->reg_no}}</td>
                     </tr>

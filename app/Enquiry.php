@@ -18,7 +18,12 @@ class Enquiry extends Model
         'remarks',
         'address',
         'start_date',
-        'end_date'
+        'end_date',
+        'batch_id',
+        'father_name',
+        'gender',
+        'email',
+        'school_name'
     ];
 
 

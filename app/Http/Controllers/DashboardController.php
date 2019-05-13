@@ -31,7 +31,7 @@ class DashboardController extends Controller
                     // Add color and link on event
                     [
                         'color' => '#f05050',
-                        'url' => '/enquiry/'.$value->id.'/edit',
+                        'url' => '/enquiry/'.$value->slug.'/edit',
                     ]
                 );
             }

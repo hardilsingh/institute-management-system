@@ -9,6 +9,7 @@ use App\Enrollment;
 use App\Http\Requests\enrollRequest;
 use App\FeeManager;
 use Illuminate\Support\Facades\DB;
+use App\Enquiry;
 
 class EnrollmentContoller extends Controller
 {
@@ -48,12 +49,18 @@ class EnrollmentContoller extends Controller
         $input['reg_no'] = 'CBA/' . time();
         $enroll = Enrollment::create($input);
         $fee_id = FeeManager::create([
-            'enrollment_id'=> $enroll->id,
-            'course_id'=> $enroll->course_id,
-            'slug'=>$enroll->slug,
+            'enrollment_id' => $enroll->id,
+            'course_id' => $enroll->course_id,
+            'slug' => $enroll->slug,
         ]);
+        if ($input['id']) {
+            $enrolled = Enquiry::findOrFail($input['id']);
+            $enrolled->enrolled = 1;
+            $enrolled->save();
+        }
+
         $request->session()->flash('student_enrolled', 'Student enrollment complete.');
-        return redirect('feemanager/'.$fee_id->slug.'/edit');
+        return redirect('feemanager/' . $fee_id->slug . '/edit');
     }
 
     /**

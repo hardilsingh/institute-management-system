@@ -10,8 +10,8 @@
         </a> -->
         <a href="http://cbainfotech.com" class="simple-text logo-normal">
             <div class="logo-image-big">
-            <img src="/img/logo.png">
-          </div> 
+                <img src="/img/logo.png">
+            </div>
         </a>
     </div>
     <div class="sidebar-wrapper">
@@ -26,6 +26,12 @@
                 <a href="/profile">
                     <i class="nc-icon nc-bank"></i>
                     <p>Search Profile</p>
+                </a>
+            </li>
+            <li class="">
+                <a href="/searchenquiry">
+                    <i class="nc-icon nc-bank"></i>
+                    <p>Search Enquiry</p>
                 </a>
             </li>
             <li>
@@ -58,19 +64,8 @@
                     <p>Enrollment Form</p>
                 </a>
             </li>
-            <li>
-                <a href="./user.html">
-                    <i class="nc-icon nc-single-02"></i>
-                    <p>SMS</p>
-                </a>
-            </li>
-            <li>
-                <a href="./user.html">
-                    <i class="nc-icon nc-single-02"></i>
-                    <p>Inventory</p>
-                </a>
-            </li>
 
         </ul>
     </div>
+    
 </div>

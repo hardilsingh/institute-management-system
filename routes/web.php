@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +32,11 @@ Route::group(['middleware' => 'admin'], function () {
     Route::resource('/course', 'CoursesController');
     Route::resource('/enroll', 'EnrollmentContoller');
     Route::resource('/students', 'StudentsController');
+    Route::get('/dues', 'FeeManagerController@checkdues' );
     Route::resource('/feemanager', 'FeeManagerController');
     Route::resource('/enquiry', 'EnquiriesController');
     Route::get('profile/search', 'SearchStudentController@search');
     Route::resource('/profile', 'SearchStudentController');
+    Route::get('/searchenquiry/search', 'SearchEnquiryController@search');
+    Route::resource('/searchenquiry', 'SearchEnquiryController');
 });

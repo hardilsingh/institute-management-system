@@ -134,7 +134,8 @@
 
                             <td>
                                 {{$reciept->student->name}}<br>
-                                +91 {{$reciept->student->tel_no}}
+                                +91 {{$reciept->student->tel_no}}<br>
+                                Course: {{$student->course->name}}
                             </td>
                         </tr>
                     </table>

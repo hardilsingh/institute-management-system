@@ -4,25 +4,10 @@
 <div class="row" style="margin-bottom:30px">
     <div class="col-lg-12">
         <h5 class="display-4">
-            Student Fee Manager
+            Dues
         </h5>
     </div>
 </div>
-
-
-<div class="row" style="margin-bottom:50px">
-    <div class="col-lg-12">
-        <a href="/dues" class="btn btn-warning btn-lg">Check Dues</a>
-    </div>
-</div>
-
-@if(Session::has('fee_updated'))
-<div class="row">
-    <div class="col-lg-5">
-        <div class="alert alert-success">{{ session('fee_updated') }}</div>
-    </div>
-</div>
-@endif
 
 <div class="col-lg-12">
     <table class="table table-hover text-capitalize">

@@ -113,4 +113,10 @@ class FeeManagerController extends Controller
     {
         //
     }
+
+
+    public function checkdues() {
+        $fees = FeeManager::where('balance' , '>' , '0')->orderBy('created_at' , 'DESC')->paginate(10);
+        return view('admin.feemanager.dues', compact('fees'));
+    }
 }
