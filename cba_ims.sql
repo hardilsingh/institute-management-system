@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2019 at 08:48 AM
+-- Generation Time: May 14, 2019 at 10:01 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.28
 
@@ -90,7 +90,7 @@ CREATE TABLE `courses` (
 --
 
 INSERT INTO `courses` (`id`, `name`, `duration`, `hours`, `fee`, `centre_id`, `created_at`, `updated_at`, `slug`) VALUES
-(2, 'c language', 30, 2, 2500, 1, '2019-05-10 05:07:37', '2019-05-10 05:07:37', 'c-language-1');
+(2, 'c language', 30, 2, 2500, 2, '2019-05-10 05:07:37', '2019-05-13 05:27:47', 'c-language');
 
 -- --------------------------------------------------------
 
@@ -109,17 +109,21 @@ CREATE TABLE `enquiries` (
   `remarks` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `start_date` date DEFAULT NULL,
-  `end_date` date DEFAULT NULL,
-  `slug` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `slug` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `father_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gender` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `school_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `batch_id` int(11) DEFAULT NULL,
+  `enrolled` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `enquiries`
 --
 
-INSERT INTO `enquiries` (`id`, `course_id`, `name`, `address`, `tel_no`, `edu`, `follow_up`, `remarks`, `created_at`, `updated_at`, `start_date`, `end_date`, `slug`) VALUES
-(2, 2, 'Hardil Singh', '662/7 Mehar chand Road Gurdaspur', '7340910031', '+12', '2019-05-20', NULL, '2019-05-10 05:12:56', '2019-05-10 06:16:51', NULL, NULL, 'hardil-singh');
+INSERT INTO `enquiries` (`id`, `course_id`, `name`, `address`, `tel_no`, `edu`, `follow_up`, `remarks`, `created_at`, `updated_at`, `slug`, `father_name`, `gender`, `email`, `school_name`, `batch_id`, `enrolled`) VALUES
+(21, 2, 'Hardil Singh', '662/7 Mehar chand Road Gurdaspur', '7340910031', '+12', '2019-05-20', NULL, '2019-05-14 05:59:31', '2019-05-14 05:59:35', 'hardil-singh', 'Kanwaljit singh', 'male', 'hardilsingh87@gmail.com', 'dps', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -139,12 +143,20 @@ CREATE TABLE `enrollments` (
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `edu` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `school_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `refer_mode` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `refer_mode` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `reg_no` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `slug` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_join` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `enrollments`
+--
+
+INSERT INTO `enrollments` (`id`, `course_id`, `batch_id`, `name`, `father_name`, `address`, `tel_no`, `gender`, `email`, `edu`, `school_name`, `refer_mode`, `created_at`, `updated_at`, `reg_no`, `slug`, `date_join`) VALUES
+(29, 2, 2, 'Hardil Singh', 'Kanwaljit singh', '662/7 Mehar chand Road Gurdaspur', '7340910031', 'male', 'hardilsingh87@gmail.com', '+12', 'dps', NULL, '2019-05-14 05:59:35', '2019-05-14 06:10:19', 'CBA/1557813575', 'hardil-singh', '2016-05-15');
 
 -- --------------------------------------------------------
 
@@ -165,6 +177,29 @@ CREATE TABLE `fee_managers` (
   `discount` int(11) DEFAULT NULL,
   `due_date` date DEFAULT NULL,
   `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `fee_managers`
+--
+
+INSERT INTO `fee_managers` (`id`, `enrollment_id`, `total_fee`, `paid_fee`, `balance`, `created_at`, `updated_at`, `course_id`, `discounted_fee`, `discount`, `due_date`, `slug`) VALUES
+(29, 29, NULL, NULL, NULL, '2019-05-14 05:59:35', '2019-05-14 05:59:35', 2, NULL, NULL, NULL, 'hardil-singh');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jobs`
+--
+
+CREATE TABLE `jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `queue` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `attempts` tinyint(3) UNSIGNED NOT NULL,
+  `reserved_at` int(10) UNSIGNED DEFAULT NULL,
+  `available_at` int(10) UNSIGNED NOT NULL,
+  `created_at` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -197,7 +232,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (11, '2019_05_10_101627_add_slug_to_course_table', 2),
 (12, '2019_05_10_104056_add_slug_col', 3),
 (13, '2019_05_10_104617_add_slug_to_course_table', 4),
-(14, '2019_05_10_105056_add_slug_col', 5);
+(14, '2019_05_10_105056_add_slug_col', 5),
+(15, '2019_05_12_162432_create_sidebars_table', 6),
+(16, '2019_05_14_110937_create_jobs_table', 7);
 
 -- --------------------------------------------------------
 
@@ -233,6 +270,34 @@ CREATE TABLE `reciepts` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sidebars`
+--
+
+CREATE TABLE `sidebars` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `url` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sidebars`
+--
+
+INSERT INTO `sidebars` (`id`, `name`, `url`, `icon`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'admin', 'fas fa-user-shield', NULL, NULL),
+(2, 'Search Profile', 'profile', 'fas fa-user-circle', NULL, NULL),
+(3, 'enquiries\r\n', 'enquiry', 'fas fa-question', NULL, NULL),
+(4, 'Students', 'students', 'fas fa-user-graduate', NULL, NULL),
+(5, 'courses', 'course', 'fas fa-book', NULL, NULL),
+(6, 'Fee Manager', 'feemanager', 'fas fa-rupee-sign', NULL, NULL),
+(7, 'Enrollment Form', 'enroll', 'fas fa-signature', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -252,7 +317,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Hardil Singh', 'hardilsingh87@gmail.com', NULL, '$2y$10$FbwQEkYW/bAOEjqChbfF3uXsmKj1nR7N7ynWeTNqtDCpgqGH3u.pC', 'Vl2mrczGxHMUNZ8MsS01M3HI9kJjHKCFPDY6QNpVy6fUHOfnneD9nmc2AsGf', '2019-05-08 12:32:25', '2019-05-08 12:32:25');
+(1, 'Hardil Singh', 'hardilsingh87@gmail.com', NULL, '$2y$10$FbwQEkYW/bAOEjqChbfF3uXsmKj1nR7N7ynWeTNqtDCpgqGH3u.pC', 'M9TfVYpGo46zmzU10KV60sWoE41mVvLH618iA5FPjxpA3yCwauiN4Y8IOIBh', '2019-05-08 12:32:25', '2019-05-08 12:32:25'),
+(2, 'cbainfotech', 'cbainfotechgsp@gmail.com', NULL, '$2y$10$daP7dL0fl4NsCeZ6Ni9INe5j3SKu1/nKgHL1LXIR2KgsoGR8cannC', 'G749pyyOG73wwQ5OcUlKeq2N2T0MhlVYbIJ0W86SASD3PyfMkiP9dBEpoilB', '2019-05-10 01:55:53', '2019-05-10 01:55:53');
 
 --
 -- Indexes for dumped tables
@@ -296,6 +362,13 @@ ALTER TABLE `fee_managers`
   ADD KEY `fee_managers_enrollment_id_foreign` (`enrollment_id`);
 
 --
+-- Indexes for table `jobs`
+--
+ALTER TABLE `jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `jobs_queue_index` (`queue`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -313,6 +386,12 @@ ALTER TABLE `password_resets`
 ALTER TABLE `reciepts`
   ADD PRIMARY KEY (`id`),
   ADD KEY `reciepts_enrollment_id_foreign` (`enrollment_id`);
+
+--
+-- Indexes for table `sidebars`
+--
+ALTER TABLE `sidebars`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -347,37 +426,49 @@ ALTER TABLE `courses`
 -- AUTO_INCREMENT for table `enquiries`
 --
 ALTER TABLE `enquiries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `enrollments`
 --
 ALTER TABLE `enrollments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `fee_managers`
 --
 ALTER TABLE `fee_managers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `jobs`
+--
+ALTER TABLE `jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `reciepts`
 --
 ALTER TABLE `reciepts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sidebars`
+--
+ALTER TABLE `sidebars`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
