@@ -36,6 +36,7 @@ class DashboardController extends Controller
                 );
             }
         }
+
         $calendar = Calendar::addEvents($events);
         $students = Enrollment::all();
         $enquiries = Enquiry::all();

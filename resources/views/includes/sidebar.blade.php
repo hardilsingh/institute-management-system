@@ -22,18 +22,6 @@
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li class="">
-                <a href="/profile">
-                    <i class="fas fa-user-circle"></i>
-                    <p>Search Profile</p>
-                </a>
-            </li>
-            <li class="">
-                <a href="/searchenquiry">
-                    <i class="nc-icon nc-bank"></i>
-                    <p>Search Enquiry</p>
-                </a>
-            </li>
             <li>
                 <a href="/enquiry">
                     <i class="fas fa-question"></i>
@@ -46,6 +34,9 @@
                     <p>Students</p>
                 </a>
             </li>
+
+
+
             <li>
                 <a href="{{route('course.index')}}">
                     <i class="fas fa-book"></i>
@@ -58,14 +49,20 @@
                     <p>Fee Manager</p>
                 </a>
             </li>
-            <li>
-                <a href="/enroll">
-                    <i class="fas fa-signature"></i>
-                    <p>Enrollment Form</p>
+            <li class="">
+                <a href="/profile">
+                    <i class="fas fa-user-circle"></i>
+                    <p>Search Profile</p>
+                </a>
+            </li>
+            <li class="">
+                <a href="/searchenquiry">
+                    <i class="nc-icon nc-bank"></i>
+                    <p>Search Enquiry</p>
                 </a>
             </li>
 
         </ul>
     </div>
-    
+
 </div>

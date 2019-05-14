@@ -97,7 +97,17 @@
             </div>
         </div>
 
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="">Date of addmission</label>
+                {!! Form::date('date_join' , null , ['class'=>'form-control']) !!}
+            </div>
+        </div>
 
+
+
+    </div>
+    <div class="row" style="margin:35px 0px">
         <div class="col-lg-4">
             <div class="form-group">
                 @if($student->course->centre_id == 2)

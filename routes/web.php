@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,4 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/searchenquiry/search', 'SearchEnquiryController@search');
     Route::resource('/searchenquiry', 'SearchEnquiryController');
 });
+

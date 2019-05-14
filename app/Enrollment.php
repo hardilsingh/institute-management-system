@@ -21,9 +21,8 @@ class Enrollment extends Model
         'edu',
         'school_name',
         'refer_mode',
-        'reg_no'
-
-
+        'reg_no',
+        'date_join',
     ];
 
     use Sluggable;

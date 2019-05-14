@@ -10,6 +10,8 @@ use App\Http\Requests\enrollRequest;
 use App\FeeManager;
 use Illuminate\Support\Facades\DB;
 use App\Enquiry;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\StudentEnrolled;
 
 class EnrollmentContoller extends Controller
 {
@@ -21,9 +23,6 @@ class EnrollmentContoller extends Controller
     public function index()
     {
         //
-        $courses = Course::all();
-        $batches = Batch::all();
-        return view('admin.enroll.index', compact('batches'), compact('courses'));
     }
 
     /**
@@ -58,6 +57,17 @@ class EnrollmentContoller extends Controller
             $enrolled->enrolled = 1;
             $enrolled->save();
         }
+
+        $data = [
+            'title'=>'You have successfully been enrolled.',
+            'enrollment_id' => $enroll->id,
+            'reg_no'=> $input['reg_no'],
+        ];
+
+        Mail::send('admin.mail.mail', $data, function ($message) use ($input) {
+            $message->to( $input['email'] , $input['name']);
+            $message->subject('Enrollment Confirmation');
+        });
 
         $request->session()->flash('student_enrolled', 'Student enrollment complete.');
         return redirect('feemanager/' . $fee_id->slug . '/edit');
