@@ -56,7 +56,10 @@
                     @endphp
                 </td>
                 <td>{{$student->name}}</td>
-                <td>{{$student->course->name}}</td>
+                <td>{{$student->course->name}}
+
+                </td>
+
                 <td>{{$student->batch->from}}:00 - {{$student->batch->to}}:00</td>
                 <td>{{$student->tel_no}}</td>
                 <td>{{$student->reg_no}}</td>

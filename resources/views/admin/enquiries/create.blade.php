@@ -78,7 +78,7 @@
     </div>
 
     <div class="row" style="margin:35px 0px">
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <div class="form-group">
                 <label for="">Batch</label>
                 <select name="batch_id" id="" class="form-control">
@@ -91,7 +91,7 @@
                 </select>
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <div class="form-group">
                 <label for="">Course</label>
                 <select name="course_id" id="" class="form-control">
@@ -104,7 +104,20 @@
                 </select>
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="">Course 2</label>
+                <select name="course_id_2" id="" class="form-control">
+                    <option value="" selected>Select course 2</option>
+                    @foreach($courses as $course)
+
+                    <option value="{{$course->id}}">{{$course->name}}</option>
+
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-3">
             <div class="form-group">
                 <label for="">Follow up Date</label>
                 {!! Form::date('follow_up', null , ['class'=>'form-control']) !!}
@@ -112,7 +125,7 @@
         </div>
     </div>
     <div class="row" style="margin:35px 0px">
-        <div class="col-lg-6">
+        <div class="col-lg-3">
             <div class="form-group">
                 {!! Form::submit('Enquiry' , ['class'=>'btn btn-success btn-lg']) !!}
             </div>
@@ -121,11 +134,5 @@
 </div>
 
 {!! Form::close() !!}
-
-
-
-
-
-
 
 @endsection

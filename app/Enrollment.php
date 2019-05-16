@@ -23,6 +23,7 @@ class Enrollment extends Model
         'refer_mode',
         'reg_no',
         'date_join',
+        'course_id_2'
     ];
 
     use Sluggable;
@@ -40,6 +41,12 @@ class Enrollment extends Model
     public function course()
     {
         return $this->belongsTo('App\Course');
+    }
+
+
+    public function course2()
+    {
+        return $this->belongsTo('App\Course' , 'course_id_2');
     }
 
     public function batch()

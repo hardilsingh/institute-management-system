@@ -72,7 +72,7 @@
     </div>
 
     <div class="row" style="margin:35px 0px">
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <div class="form-group">
                 <label for="">Batch</label>
                 <select name="batch_id" id="" class="form-control">
@@ -85,7 +85,7 @@
                 </select>
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <div class="form-group">
                 <label for="">Course</label>
                 <select name="course_id" id="" class="form-control">
@@ -96,8 +96,19 @@
                 </select>
             </div>
         </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="">Course 2</label>
+                <select name="course_id_2" id="" class="form-control">
+                    <option value="{{$student->course2->id}}" selected>{{$student->course2->name}}</option>
+                    @foreach($courses as $course)
+                    <option value="{{$course->id}}">{{$course->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <div class="form-group">
                 <label for="">Date of addmission</label>
                 {!! Form::date('date_join' , null , ['class'=>'form-control']) !!}

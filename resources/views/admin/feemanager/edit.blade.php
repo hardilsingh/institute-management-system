@@ -46,13 +46,24 @@
                         <td>{{$student->student->reg_no}}</td>
                     </tr>
                     <tr>
-                        <td>Course:</td>
+                        <td>Course 1:</td>
                         <td>{{$student->course->name}}</td>
                     </tr>
                     <tr>
-                        <td>Course Fee:</td>
+                        <td>Course Fee 1:</td>
                         <td>₹ {{$student->course->fee}}</td>
                     </tr>
+
+                    @if($student->course2)
+                    <tr>
+                        <td>Course 2:</td>
+                        <td>{{$student->course2->name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Course Fee 2:</td>
+                        <td>₹ {{$student->course2->fee}}</td>
+                    </tr>
+                    @endif
 
                     <tr>
                         <td>Discount:</td>
@@ -83,6 +94,12 @@
         <div class="col-lg-4" style="margin-left:100px">
 
             <input type="hidden" name="total_fee" value="{{$student->course->fee}}">
+            @if($student->course2)
+            <input type="hidden" name="total_fee1" value="{{$student->course2->fee}}">
+            @endif
+            @if(!$student->course2)
+            <input type="hidden" name="total_fee1" value="0">
+            @endif
             <input type="hidden" name="balance" value="{{$student->balance}}">
             <input type="hidden" name="discounted_fee" value="{{$student->discounted_fee}}">
             <input type="hidden" name="enrollment_id" value="{{$student->enrollment_id}}">

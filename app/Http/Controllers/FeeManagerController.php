@@ -80,7 +80,7 @@ class FeeManagerController extends Controller
         //
         $input = $request->all();
         if ($input['discounted_fee'] == null) {
-            $input['discounted_fee'] = $input['total_fee'] - $input['discount'];
+            $input['discounted_fee'] = ($input['total_fee'] + $input['total_fee1']) - $input['discount'];
             $input['balance'] = $input['discounted_fee'] - $input['paid_fee'];
         } else {
             $input['balance'] = $input['balance'] - $input['paid_fee'];

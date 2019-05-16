@@ -83,6 +83,7 @@
                     <input type="hidden" name="school_name" value="{{$enquiry->school_name}}">
                     <input type="hidden" name="batch_id" value="{{$enquiry->batch_id}}">
                     <input type="hidden" name="course_id" value="{{$enquiry->course_id}}">
+                    <input type="hidden" name="course_id_2" value="{{$enquiry->course_id_2}}">
                     {!! Form::submit('Enroll' , ['class'=>'btn btn-warning']) !!}
                     {!! Form::close() !!}
                     @endif

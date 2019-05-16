@@ -23,7 +23,8 @@ class Enquiry extends Model
         'father_name',
         'gender',
         'email',
-        'school_name'
+        'school_name',
+        'course_id_2',
     ];
 
 

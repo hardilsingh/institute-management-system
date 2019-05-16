@@ -17,7 +17,8 @@ class FeeManager extends Model
         'due_date',
         'discount',
         'discounted_fee',
-        'slug'
+        'slug',
+        'course_id_2'
     ];
 
     use Sluggable;
@@ -37,6 +38,10 @@ class FeeManager extends Model
 
     public function course() {
         return $this->belongsTo('App\Course' , 'course_id');
+    }
+
+    public function course2() {
+        return $this->belongsTo('App\Course' , 'course_id_2');
     }
 
     public function student() {

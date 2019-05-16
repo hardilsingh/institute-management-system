@@ -51,6 +51,7 @@ class EnrollmentContoller extends Controller
             'enrollment_id' => $enroll->id,
             'course_id' => $enroll->course_id,
             'slug' => $enroll->slug,
+            'course_id_2'=>$enroll->course_id_2
         ]);
         if ($input['id']) {
             $enrolled = Enquiry::findOrFail($input['id']);
@@ -58,16 +59,16 @@ class EnrollmentContoller extends Controller
             $enrolled->save();
         }
 
-        $data = [
-            'title'=>'You have successfully been enrolled.',
-            'enrollment_id' => $enroll->id,
-            'reg_no'=> $input['reg_no'],
-        ];
+        // $data = [
+        //     'title'=>'You have successfully been enrolled.',
+        //     'enrollment_id' => $enroll->id,
+        //     'reg_no'=> $input['reg_no'],
+        // ];
 
-        Mail::send('admin.mail.mail', $data, function ($message) use ($input) {
-            $message->to( $input['email'] , $input['name']);
-            $message->subject('Enrollment Confirmation');
-        });
+        // Mail::send('admin.mail.mail', $data, function ($message) use ($input) {
+        //     $message->to( $input['email'] , $input['name']);
+        //     $message->subject('Enrollment Confirmation');
+        // });
 
         $request->session()->flash('student_enrolled', 'Student enrollment complete.');
         return redirect('feemanager/' . $fee_id->slug . '/edit');
