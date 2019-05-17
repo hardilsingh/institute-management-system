@@ -109,11 +109,11 @@
                     <table>
                         <tr>
                             <td class="title">
-                                <img src="/img/logo.png" style="width:100%; max-width:300px;">
+                                <img src="/img/reciept_logo_black.png" style="width:100%; max-width:300px;">
                             </td>
 
                             <td>
-                                Invoice #: {{$reciept->id}}<br>
+                                Reciept #: {{$reciept->id}}<br>
                                 Created: {{$reciept->created_at}}<br>
                             </td>
                         </tr>
@@ -129,13 +129,17 @@
                                 CBA Infotech<br>
                                 Kalanaur Road,<br>
                                 143521,<br>
-                                Gurdaspur, Punjab
+                                Gurdaspur, Punjab<br>
+                                Tel no: 01874-503705
                             </td>
 
                             <td>
                                 {{$reciept->student->name}}<br>
                                 +91 {{$reciept->student->tel_no}}<br>
-                                Course: {{$student->course->name}}
+                                Course(s): {{$student->course->name}}
+                                ,
+                                @if($student->course2->name){{$student->course2->name}}
+                                @endif
                             </td>
                         </tr>
                     </table>
@@ -179,7 +183,7 @@
 
                 <td>
                     @if($reciept->balance == 0)
-                    Nill
+                    0
                     @endif
                     @if($reciept->balance !== 0 )
                     ₹ {{$reciept->balance}}
@@ -196,11 +200,19 @@
                 </td>
             </tr>
 
+            <tr>
+                <td>Student Signature:</td>
 
+                <td>Stamp/Signature:</td>
+            </tr>
 
-
-
+            <tr>
+                <td>
+                    <span style="font-size:13px">The fee is not refundable</span>
+                </td>
+            </tr>
         </table>
+
     </div>
 
     <div class="col-lg-12 text-center" style="margin-top:20px">

@@ -33,7 +33,6 @@ class enrollRequest extends FormRequest
             'tel_no'=>'required',
             'gender'=>'required',
             'edu'=>'required',
-            'school_name'=>'required',
         ];
     }
 }

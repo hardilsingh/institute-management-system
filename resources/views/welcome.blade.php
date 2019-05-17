@@ -82,7 +82,7 @@
 
         <div class="content">
             <div class="title m-b-md">
-                <img src="/img/logo.png" alt="" class="img-responsive">
+                <img src="/img/reciept_logo_black.png" alt="" class="img-responsive">
             </div>
             <div class="row">
                 <div class="col-lg-12" style="font-size">

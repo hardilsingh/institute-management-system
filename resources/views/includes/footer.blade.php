@@ -4,14 +4,12 @@
             <nav class="footer-nav">
                 <ul>
                     <li>
-                        <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>
+                        <a href="https://www.cbainfotech.com" target="_blank">Visit Site</a>
                     </li>
                     <li>
-                        <a href="http://blog.creative-tim.com/" target="_blank">Blog</a>
+                        <a href="http://cbainfotech.com/blog" target="_blank">Blog</a>
                     </li>
-                    <li>
-                        <a href="https://www.creative-tim.com/license" target="_blank">Licenses</a>
-                    </li>
+                    
                 </ul>
             </nav>
             <div class="credits ml-auto">
@@ -19,13 +17,7 @@
                     ©
                     <script>
                         document.write(new Date().getFullYear())
-                    </script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
-                </span>
-                <span class="copyright">
-                    ©
-                    <script>
-                        document.write(new Date().getFullYear())
-                    </script>, developed by <i class="fa fa-heart heart"></i> Hardil Singh
+                    </script> CBA Infotech 
                 </span>
             </div>
         </div>

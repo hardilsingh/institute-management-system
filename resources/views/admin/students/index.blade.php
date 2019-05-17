@@ -56,8 +56,9 @@
                     @endphp
                 </td>
                 <td>{{$student->name}}</td>
-                <td>{{$student->course->name}}
-
+                <td>{{$student->course->name}}, 
+                    @if($student->course2->name){{$student->course2->name}}
+                    @endif
                 </td>
 
                 <td>{{$student->batch->from}}:00 - {{$student->batch->to}}:00</td>

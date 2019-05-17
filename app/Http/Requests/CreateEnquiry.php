@@ -32,7 +32,6 @@ class CreateEnquiry extends FormRequest
             'edu'=>'required',
             'father_name'=>'required',
             'gender'=>'required',
-            'school_name'=>'required',
             'batch_id'=>'required',
         ];
     }

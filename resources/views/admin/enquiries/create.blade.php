@@ -81,7 +81,7 @@
         <div class="col-lg-3">
             <div class="form-group">
                 <label for="">Batch</label>
-                <select name="batch_id" id="" class="form-control">
+                <select name="batch_id" id="" class="form-control" >
                     <option value="" selected>Select batch</option>
                     @foreach($batches as $batch)
 

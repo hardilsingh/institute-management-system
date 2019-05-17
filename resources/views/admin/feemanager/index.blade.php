@@ -55,12 +55,12 @@
                 <td>{{$fee->course->name}}</td>
                 <td>₹ {{$fee->course->fee}}</td>
                 <td>₹ {{$fee->paid_fee}}</td>
-                <td>
+                <td>₹
                     @if($fee->balance == 0)
-                    Nill
+                    0
                     @endif
                     @if($fee->balance !== 0 )
-                    ₹ {{$fee->balance}}
+                    {{$fee->balance}}
                     @endif
                 </td>
                 <td>{{$fee->due_date}}</td>
