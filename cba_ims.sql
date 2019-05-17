@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 14, 2019 at 10:01 AM
+-- Generation Time: May 17, 2019 at 07:39 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.28
 
@@ -90,7 +90,8 @@ CREATE TABLE `courses` (
 --
 
 INSERT INTO `courses` (`id`, `name`, `duration`, `hours`, `fee`, `centre_id`, `created_at`, `updated_at`, `slug`) VALUES
-(2, 'c language', 30, 2, 2500, 2, '2019-05-10 05:07:37', '2019-05-13 05:27:47', 'c-language');
+(1, 'c language', 91, 2, 2500, 1, '2019-05-17 04:37:42', '2019-05-17 04:37:42', 'c-language'),
+(2, 'PHP', 180, 4, 15000, 2, '2019-05-17 04:37:54', '2019-05-17 04:37:54', 'php');
 
 -- --------------------------------------------------------
 
@@ -115,15 +116,17 @@ CREATE TABLE `enquiries` (
   `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `school_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `batch_id` int(11) DEFAULT NULL,
-  `enrolled` int(11) DEFAULT NULL
+  `enrolled` int(11) DEFAULT NULL,
+  `course_id_2` int(191) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `enquiries`
 --
 
-INSERT INTO `enquiries` (`id`, `course_id`, `name`, `address`, `tel_no`, `edu`, `follow_up`, `remarks`, `created_at`, `updated_at`, `slug`, `father_name`, `gender`, `email`, `school_name`, `batch_id`, `enrolled`) VALUES
-(21, 2, 'Hardil Singh', '662/7 Mehar chand Road Gurdaspur', '7340910031', '+12', '2019-05-20', NULL, '2019-05-14 05:59:31', '2019-05-14 05:59:35', 'hardil-singh', 'Kanwaljit singh', 'male', 'hardilsingh87@gmail.com', 'dps', 2, 1);
+INSERT INTO `enquiries` (`id`, `course_id`, `name`, `address`, `tel_no`, `edu`, `follow_up`, `remarks`, `created_at`, `updated_at`, `slug`, `father_name`, `gender`, `email`, `school_name`, `batch_id`, `enrolled`, `course_id_2`) VALUES
+(1, 1, 'Hardil Singh', '662/7 Mehar chand Road Gurdaspur', '7340910031', '+12', '2019-05-20', NULL, '2019-05-17 04:40:51', '2019-05-17 04:40:57', 'hardil-singh', 'Kanwaljit singh', 'male', 'hardilsingh87@gmail.com', 'dps', 2, 1, 2),
+(2, 1, 'Hardil Singh', '662/7 Mehar chand Road Gurdaspur', '7340910031', '10', '2019-05-15', NULL, '2019-05-17 05:01:21', '2019-05-17 05:02:07', 'hardil-singh-1', 'ka', 'male', NULL, NULL, 3, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -140,23 +143,25 @@ CREATE TABLE `enrollments` (
   `address` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tel_no` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `gender` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `edu` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `school_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `school_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `refer_mode` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `reg_no` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `date_join` date DEFAULT NULL
+  `date_join` date DEFAULT NULL,
+  `course_id_2` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `enrollments`
 --
 
-INSERT INTO `enrollments` (`id`, `course_id`, `batch_id`, `name`, `father_name`, `address`, `tel_no`, `gender`, `email`, `edu`, `school_name`, `refer_mode`, `created_at`, `updated_at`, `reg_no`, `slug`, `date_join`) VALUES
-(29, 2, 2, 'Hardil Singh', 'Kanwaljit singh', '662/7 Mehar chand Road Gurdaspur', '7340910031', 'male', 'hardilsingh87@gmail.com', '+12', 'dps', NULL, '2019-05-14 05:59:35', '2019-05-14 06:10:19', 'CBA/1557813575', 'hardil-singh', '2016-05-15');
+INSERT INTO `enrollments` (`id`, `course_id`, `batch_id`, `name`, `father_name`, `address`, `tel_no`, `gender`, `email`, `edu`, `school_name`, `refer_mode`, `created_at`, `updated_at`, `reg_no`, `slug`, `date_join`, `course_id_2`) VALUES
+(1, 1, 2, 'Hardil Singh', 'Kanwaljit singh', '662/7 Mehar chand Road Gurdaspur', '7340910031', 'male', 'hardilsingh87@gmail.com', '+12', 'dps', NULL, '2019-05-17 04:40:57', '2019-05-17 04:40:57', 'CBA/1558068057', 'hardil-singh', NULL, 2),
+(2, 1, 3, 'Hardil Singh', 'ka', '662/7 Mehar chand Road Gurdaspur', '7340910031', 'male', NULL, '10', NULL, NULL, '2019-05-17 05:02:07', '2019-05-17 05:02:07', 'CBA/1558069327', 'hardil-singh-1', NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -176,15 +181,17 @@ CREATE TABLE `fee_managers` (
   `discounted_fee` int(11) DEFAULT NULL,
   `discount` int(11) DEFAULT NULL,
   `due_date` date DEFAULT NULL,
-  `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+  `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `course_id_2` int(191) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `fee_managers`
 --
 
-INSERT INTO `fee_managers` (`id`, `enrollment_id`, `total_fee`, `paid_fee`, `balance`, `created_at`, `updated_at`, `course_id`, `discounted_fee`, `discount`, `due_date`, `slug`) VALUES
-(29, 29, NULL, NULL, NULL, '2019-05-14 05:59:35', '2019-05-14 05:59:35', 2, NULL, NULL, NULL, 'hardil-singh');
+INSERT INTO `fee_managers` (`id`, `enrollment_id`, `total_fee`, `paid_fee`, `balance`, `created_at`, `updated_at`, `course_id`, `discounted_fee`, `discount`, `due_date`, `slug`, `course_id_2`) VALUES
+(1, 1, 2500, 13500, 0, '2019-05-17 04:40:57', '2019-05-17 04:41:52', 1, 16500, 1000, '2019-05-20', 'hardil-singh', 2),
+(2, 2, NULL, NULL, NULL, '2019-05-17 05:02:07', '2019-05-17 05:02:07', 1, NULL, NULL, NULL, 'hardil-singh-1', 2);
 
 -- --------------------------------------------------------
 
@@ -234,7 +241,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (13, '2019_05_10_104617_add_slug_to_course_table', 4),
 (14, '2019_05_10_105056_add_slug_col', 5),
 (15, '2019_05_12_162432_create_sidebars_table', 6),
-(16, '2019_05_14_110937_create_jobs_table', 7);
+(16, '2019_05_14_110937_create_jobs_table', 7),
+(17, '2019_05_16_144122_add_2_course_to_enrollment_table', 8);
 
 -- --------------------------------------------------------
 
@@ -247,6 +255,13 @@ CREATE TABLE `password_resets` (
   `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+('hardilsingh87@gmail.com', '$2y$10$GQI.r0vcol.zY5rFdGyxLuLT0u1LKqatybrOmNFMWLHW/GsESmdt2', '2019-05-17 05:31:29');
 
 -- --------------------------------------------------------
 
@@ -266,6 +281,14 @@ CREATE TABLE `reciepts` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `due_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `reciepts`
+--
+
+INSERT INTO `reciepts` (`id`, `enrollment_id`, `total_fee`, `fee_manager_id`, `balance`, `discount`, `paid_fee`, `created_at`, `updated_at`, `due_date`) VALUES
+(1, 1, 2500, 1, 13500, 1000, 3000, '2019-05-17 04:41:13', '2019-05-17 04:41:13', '2019-05-21'),
+(2, 1, 2500, 1, 0, 1000, 13500, '2019-05-17 04:41:52', '2019-05-17 04:41:52', '2019-05-20');
 
 -- --------------------------------------------------------
 
@@ -317,7 +340,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Hardil Singh', 'hardilsingh87@gmail.com', NULL, '$2y$10$FbwQEkYW/bAOEjqChbfF3uXsmKj1nR7N7ynWeTNqtDCpgqGH3u.pC', 'M9TfVYpGo46zmzU10KV60sWoE41mVvLH618iA5FPjxpA3yCwauiN4Y8IOIBh', '2019-05-08 12:32:25', '2019-05-08 12:32:25'),
+(1, 'Hardil Singh', 'hardilsingh87@gmail.com', NULL, '$2y$10$FbwQEkYW/bAOEjqChbfF3uXsmKj1nR7N7ynWeTNqtDCpgqGH3u.pC', 'MaYgPFnfB08y7JlDsZC2wzx6o3NXCKFXmnk4rzuLB97SQGSCsdVBNzwTKCyY', '2019-05-08 12:32:25', '2019-05-08 12:32:25'),
 (2, 'cbainfotech', 'cbainfotechgsp@gmail.com', NULL, '$2y$10$daP7dL0fl4NsCeZ6Ni9INe5j3SKu1/nKgHL1LXIR2KgsoGR8cannC', 'G749pyyOG73wwQ5OcUlKeq2N2T0MhlVYbIJ0W86SASD3PyfMkiP9dBEpoilB', '2019-05-10 01:55:53', '2019-05-10 01:55:53');
 
 --
@@ -426,19 +449,19 @@ ALTER TABLE `courses`
 -- AUTO_INCREMENT for table `enquiries`
 --
 ALTER TABLE `enquiries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `enrollments`
 --
 ALTER TABLE `enrollments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `fee_managers`
 --
 ALTER TABLE `fee_managers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `jobs`
@@ -450,13 +473,13 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `reciepts`
 --
 ALTER TABLE `reciepts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `sidebars`
