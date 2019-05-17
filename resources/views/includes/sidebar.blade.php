@@ -61,6 +61,12 @@
                     <p>Search Enquiry</p>
                 </a>
             </li>
+            <li class="">
+                <a href="/inventory">
+                    <i class="fas fa-cogs"></i>
+                    <p>Inventory</p>
+                </a>
+            </li>
 
         </ul>
     </div>

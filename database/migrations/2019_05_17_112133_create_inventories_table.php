@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Add2CourseToFeemanagerTable extends Migration
+class CreateInventoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class Add2CourseToFeemanagerTable extends Migration
      */
     public function up()
     {
-        Schema::table('fee_managers', function (Blueprint $table) {
-            //
-            $table->integer('course_id_2')->unsigned()->nullable();
+        Schema::create('inventories', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('category')->nullable();
+            $table->integer('qty')->unsigned()->nullable();
+            $table->timestamps();
         });
     }
 
@@ -26,8 +28,6 @@ class Add2CourseToFeemanagerTable extends Migration
      */
     public function down()
     {
-        Schema::table('feemanagers', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('inventories');
     }
 }
