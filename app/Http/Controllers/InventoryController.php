@@ -62,10 +62,10 @@ class InventoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
         //
-        $inventory = Inventory::findOrFail($id);
+        $inventory = Inventory::where('slug' , $slug )->first();
         return view('admin.inventory.edit', compact('inventory'));
     }
 
@@ -80,7 +80,7 @@ class InventoryController extends Controller
     {
         //
         $category = Inventory::findOrFail($id)->update($request->all());
-        $request->session()->flash('inventory_updates', 'Inventory updated successfully');
+        $request->session()->flash('inventory_updated', 'Inventory updated successfully');
         return redirect('/inventory');
     }
 

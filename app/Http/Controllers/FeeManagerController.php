@@ -88,6 +88,7 @@ class FeeManagerController extends Controller
 
         $update_fee = FeeManager::findOrFail($id);
         $update_fee->update($input);
+        $update_fee->sms( $update_fee->student->tel_no  ,$update_fee->paid_fee , $update_fee->balance , $update_fee->due_date );
         $request->session()->flash('fee_updated', 'Fee updated successfully.');
 
         $create_reciept = new Reciept([

@@ -1,15 +1,16 @@
 @extends('layouts.admin')
 @section('content')
 
-<div class="row">
+<div class="row" style="margin-bottom:30px">
     <div class="col-lg-12">
-        <h6 class="display-4">
+        <h5 class="display-4">
             Enquiries
-        </h6>
+
+        </h5>
     </div>
 </div>
 
-<div class="row">
+<div class="row" style="margin-bottom:50px">
     <div class="col-lg-12">
         <a href="{{route('enquiry.create')}}" class="btn btn-primary btn-lg">Create</a>
     </div>

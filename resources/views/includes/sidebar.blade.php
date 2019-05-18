@@ -8,7 +8,7 @@
                 <img src="/img/logo.png">
             </div>
         </a> -->
-        <a href="http://cbainfotech.com" class="simple-text logo-normal">
+        <a href="/admin" class="simple-text logo-normal">
             <div class="logo-image-big">
                 <img src="/img/logo.png">
             </div>
@@ -65,6 +65,12 @@
                 <a href="/inventory">
                     <i class="fas fa-cogs"></i>
                     <p>Inventory</p>
+                </a>
+            </li>
+            <li class="">
+                <a href="/docs">
+                <i class="fas fa-file-alt"></i>
+                    <p>Issued Docs</p>
                 </a>
             </li>
 

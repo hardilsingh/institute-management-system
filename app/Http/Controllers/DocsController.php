@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Enquiry;
-use App\Course;
-use App\Http\Requests\CreateEnquiry;
-use App\Batch;
+use App\Docs;
 
-class EnquiriesController extends Controller
+class DocsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +15,8 @@ class EnquiriesController extends Controller
     public function index()
     {
         //
-        
-        $courses = Course::all();
-        $enquiries = Enquiry::orderBy('created_at' , 'DESC')->paginate(10);
-        return view('admin.enquiries.index' , compact(['enquiries' , 'courses']));
+        $docs = Docs::paginate(10);
+        return view('admin.docs.index' , compact('docs'));
     }
 
     /**
@@ -32,9 +27,6 @@ class EnquiriesController extends Controller
     public function create()
     {
         //
-        $batches = Batch::all();
-        $courses = Course::all();
-        return view('admin.enquiries.create' , compact(['courses' , 'batches']));
     }
 
     /**
@@ -43,12 +35,9 @@ class EnquiriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateEnquiry $request)
+    public function store(Request $request)
     {
         //
-        $enquiry = Enquiry::create($request->all());
-        $request->session()->flash('enquiry_created', 'Enquiry created successfully');
-        return redirect('/enquiry');
     }
 
     /**
@@ -68,11 +57,9 @@ class EnquiriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($slug)
+    public function edit($id)
     {
         //
-        $enquiry = Enquiry::where('slug' , $slug)->first();
-        return view('admin.enquiries.edit' , compact('enquiry'));
     }
 
     /**
@@ -85,8 +72,8 @@ class EnquiriesController extends Controller
     public function update(Request $request, $id)
     {
         //
-        Enquiry::findOrFail($id)->update($request->all());
-        $request->session()->flash('enq_updated', 'Enquiry updated successfully. Next Follow up date is '. $request->follow_up);
+        Docs::findOrFail($id)->update($request->all());
+        $request->session()->flash('updated', 'Docs updates successfully');
         return redirect()->back();
     }
 

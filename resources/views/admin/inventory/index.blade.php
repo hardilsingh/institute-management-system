@@ -1,9 +1,13 @@
 @extends('layouts.admin')
 @section('content')
 
-<h6 class="display-4">
-    Inventory
-</h6>
+<div class="row" style="margin-bottom:30px">
+    <div class="col-lg-12">
+        <h5 class="display-4">
+            Inventory
+        </h5>
+    </div>
+</div>
 
 @if(Session::has('inventory_created'))
 <div class="col-lg-6">
@@ -27,8 +31,8 @@
 </div>
 @endif
 
-<div class="col-lg-6">
-    <a href="{{route('inventory.create')}}" class="btn btn-primary">Add Inventory</a>
+<div class="col-lg-6" style="margin-bottom:50px">
+    <a href="{{route('inventory.create')}}" class="btn btn-primary btn-lg">Add Inventory</a>
 </div>
 
 
@@ -66,7 +70,7 @@
                     {!! Form::submit('Delete' , ['class'=>'btn btn-danger']) !!}
                     {!! Form::close() !!}
                 </td>
-                <td><a href="{{route('inventory.edit' , $inventory->id)}}" class="btn btn-warning">Edit</a></td>
+                <td><a href="{{route('inventory.edit' , $inventory->slug)}}" class="btn btn-warning">Edit</a></td>
 
 
             </tr>

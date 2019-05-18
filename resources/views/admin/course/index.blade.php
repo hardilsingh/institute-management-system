@@ -1,9 +1,13 @@
 @extends('layouts.admin')
 @section('content')
 
-<h6 class="display-4">
-    Courses
-</h6>
+<div class="row" style="margin-bottom:30px">
+    <div class="col-lg-12">
+        <h5 class="display-4">
+            Courses
+        </h5>
+    </div>
+</div>
 
 @if(Session::has('course_created'))
 <div class="col-lg-6">
@@ -27,8 +31,8 @@
 </div>
 @endif
 
-<div class="col-lg-6">
-    <a href="{{route('course.create')}}" class="btn btn-primary">Add Course</a>
+<div class="col-lg-6" style="margin-bottom:50px">
+    <a href="{{route('course.create')}}" class="btn btn-primary btn-lg">Add Course</a>
 
 </div>
 
@@ -62,7 +66,7 @@
                     @endphp
                 </td>
                 <td>{{$course->name}}</td>
-                <td>{{$course->duration}} days</td>
+                <td>{{$course->duration}}</td>
                 <td>{{$course->hours}} hrs</td>
                 <td>₹ {{$course->fee}}</td>
                 <td>{{$course->centre->name}}</td>

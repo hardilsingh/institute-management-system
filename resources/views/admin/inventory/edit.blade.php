@@ -17,6 +17,9 @@
                 
                 ]) !!}
 
+
+                {{csrf_field()}}
+
                 <div class="row" style="margin-bottom:30px; margin-top:30px">
                     <div class="col-sm-9 col-md-9 col-lg-8 mx-auto">
                         <div class="form-label-group">

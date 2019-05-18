@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 
-<h5 class="display-4">
+<h5 class="display-4" style="margin-bottom:50px">
     Students
 </h5>
 @if(Session::has('student_enrolled'))
@@ -56,8 +56,9 @@
                     @endphp
                 </td>
                 <td>{{$student->name}}</td>
-                <td>{{$student->course->name}}, 
-                    @if($student->course2->name){{$student->course2->name}}
+                <td>{{$student->course->name}}
+                    @if($student->course2)
+                    ,{{$student->course2->name}}
                     @endif
                 </td>
 

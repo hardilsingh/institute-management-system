@@ -41,5 +41,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/searchenquiry/search', 'SearchEnquiryController@search');
     Route::resource('/searchenquiry', 'SearchEnquiryController');
     Route::resource('/inventory', 'InventoryController');
+    Route::resource('/docs', 'DocsController');
 });
 

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Enquiry;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\StudentEnrolled;
+use App\Docs;
 
 class EnrollmentContoller extends Controller
 {
@@ -47,28 +48,30 @@ class EnrollmentContoller extends Controller
         $input = $request->all();
         $input['reg_no'] = 'CBA/' . time();
         $enroll = Enrollment::create($input);
+        $enroll->sms($enroll->tel_no , $enroll->reg_no);
+
+        //create fee manager account automatically
         $fee_id = FeeManager::create([
             'enrollment_id' => $enroll->id,
             'course_id' => $enroll->course_id,
             'slug' => $enroll->slug,
             'course_id_2'=>$enroll->course_id_2
         ]);
+
+        //create docs entry automatically
+
+        $docs = Docs::create([
+            'enrollment_id' => $enroll->id,
+            'course_id' => $enroll->course_id,
+            'course_id_2'=>$enroll->course_id_2
+        ]);
+
         if ($input['id']) {
             $enrolled = Enquiry::findOrFail($input['id']);
             $enrolled->enrolled = 1;
             $enrolled->save();
         }
 
-        // $data = [
-        //     'title'=>'You have successfully been enrolled.',
-        //     'enrollment_id' => $enroll->id,
-        //     'reg_no'=> $input['reg_no'],
-        // ];
-
-        // Mail::send('admin.mail.mail', $data, function ($message) use ($input) {
-        //     $message->to( $input['email'] , $input['name']);
-        //     $message->subject('Enrollment Confirmation');
-        // });
 
         $request->session()->flash('student_enrolled', 'Student enrollment complete.');
         return redirect('feemanager/' . $fee_id->slug . '/edit');

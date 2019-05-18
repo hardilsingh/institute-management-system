@@ -7,6 +7,7 @@ use App\Enrollment;
 use App\Enquiry;
 use App\Course;
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
+use App\Docs;
 
 class DashboardController extends Controller
 {
@@ -41,7 +42,8 @@ class DashboardController extends Controller
         $students = Enrollment::all();
         $enquiries = Enquiry::all();
         $courses = Course::all();
-        return view('admin.dashboard', compact(['students', 'enquiries', 'courses' , 'calendar']));
+        $certificates = Docs::with('certificate' , '1')->get();
+        return view('admin.dashboard', compact(['students', 'enquiries', 'courses' , 'calendar' , 'certificates']));
     }
 
     /**
