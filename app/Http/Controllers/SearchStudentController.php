@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Enrollment;
 use App\FeeManager;
 use App\Http\Requests\SearchStudent;
+use App\Docs;
 
 class SearchStudentController extends Controller
 {
@@ -93,6 +94,6 @@ class SearchStudentController extends Controller
             ->orWhere('tel_no', 'like', '%' . $item['search_result'] . '%')
             ->orWhere('reg_no', 'like', '%' . $item['search_result'] . '%')
             ->get();
-        return view('admin.search.results', compact('students'));
+        return view('admin.search.results', compact(['students']));
     }
 }

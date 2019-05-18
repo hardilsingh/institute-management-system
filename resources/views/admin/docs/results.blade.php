@@ -1,36 +1,21 @@
 @extends('layouts.admin')
 @section('content')
-@section('styles')
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
 
-@stop
-
-<div class="row" style="margin-bottom:50px">
-    <div class="col-lg-12">
-        <h6 class="display-4">
-            Documents Issued
-        </h6>
-    </div>
-</div>
-
-<!-- <div class="row" style="margin-bottom:50px">
-    <div class="col-lg-5">
-        <form action="" method="get">
-            <div class="form-group" style="display:flex; align-items:center;">
-                <input type="text" name="search_doc" id="" class="form-control" placeholder="Enter name, registration number, phone number">
-                <input type="submit" value="Search" class="btn btn-success" style="margin-left:20px">
-            </div>
-        </form>
-    </div>
-</div> -->
-
-@if(Session::has('updated'))
 <div class="row">
-    <div class="col-lg-5">
-        <div class="alert alert-success">{{ session('updated') }}</div>
+    <div class="col-lg-12">
+        <h5 class="display-4">
+            Results
+        </h5>
     </div>
 </div>
-@endif
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h5 class="text-success">Total Results: {{count($docs)}}</h5>
+    </div>
+</div>
+
 
 <div class="col-lg-12">
     <table class="table table-hover text-capitalize">

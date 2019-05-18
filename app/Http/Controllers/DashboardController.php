@@ -42,7 +42,7 @@ class DashboardController extends Controller
         $students = Enrollment::all();
         $enquiries = Enquiry::all();
         $courses = Course::all();
-        $certificates = Docs::with('certificate' , '1')->get();
+        $certificates = Docs::where('certificate' , '1')->get();
         return view('admin.dashboard', compact(['students', 'enquiries', 'courses' , 'calendar' , 'certificates']));
     }
 
