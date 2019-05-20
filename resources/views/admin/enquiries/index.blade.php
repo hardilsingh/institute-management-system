@@ -10,11 +10,21 @@
     </div>
 </div>
 
+
 <div class="row" style="margin-bottom:50px">
-    <div class="col-lg-12">
+    <div class="col-lg-2">
         <a href="{{route('enquiry.create')}}" class="btn btn-primary btn-lg">Create</a>
     </div>
+
+    <div class="col-lg-2" style="margin-bottom:50px">
+        <a href="/enquiry/downloadExcel" class="btn btn-warning btn-lg">Export excel file</a>
+
+    </div>
 </div>
+
+
+
+
 
 
 

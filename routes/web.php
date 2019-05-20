@@ -32,9 +32,11 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/reciept/{id}', 'RecieptController@show');
     Route::resource('/course', 'CoursesController');
     Route::resource('/enroll', 'EnrollmentContoller');
+    Route::get('/students/downloadExcel', 'StudentsController@export');
     Route::resource('/students', 'StudentsController');
     Route::get('/dues', 'FeeManagerController@checkdues' );
     Route::resource('/feemanager', 'FeeManagerController');
+    Route::get('/enquiry/downloadExcel', 'EnquiriesController@export');
     Route::resource('/enquiry', 'EnquiriesController');
     Route::get('profile/search', 'SearchStudentController@search');
     Route::resource('/profile', 'SearchStudentController');

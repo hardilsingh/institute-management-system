@@ -27,9 +27,20 @@
     </div>
 </div>
 @endif
-<div class="col-lg-6">
+
+@if(Session::has('downloading'))
+<div class="row">
+    <div class="col-lg-5">
+        <div class="alert alert-success">{{ session('downloading') }}</div>
+    </div>
+</div>
+@endif
+
+<div class="col-lg-6" style="margin-bottom:50px">
+    <a href="/students/downloadExcel" class="btn btn-primary btn-lg">Export excel file</a>
 
 </div>
+
 
 <div class="col-lg-12">
     <table class="table table-hover text-capitalize">

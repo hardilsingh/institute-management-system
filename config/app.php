@@ -163,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -230,6 +231,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Calendar'=>MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 

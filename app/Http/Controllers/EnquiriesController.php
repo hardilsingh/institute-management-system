@@ -7,6 +7,8 @@ use App\Enquiry;
 use App\Course;
 use App\Http\Requests\CreateEnquiry;
 use App\Batch;
+use App\Exports\EnquiriesViewExport;
+use Excel;
 
 class EnquiriesController extends Controller
 {
@@ -99,5 +101,11 @@ class EnquiriesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function export()
+    {
+        $type = 'xls';
+        return Excel::download(new EnquiriesViewExport, 'enquiries.'.$type);
     }
 }

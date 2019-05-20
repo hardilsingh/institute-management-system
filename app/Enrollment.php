@@ -64,7 +64,7 @@ class Enrollment extends Model
 
     public function sms($ph, $reg_id)
     {
-        $msg = "Welcome to cba infotech. Your registration number is " . $reg_id . ". Please keep this number for future refrence";
+        $msg = "Welcome to cba infotech. Your registration number is " . $reg_id . ". Please keep this number for future reference.";
         $number = '91' . $ph;
         $cSession = curl_init();
         curl_setopt($cSession, CURLOPT_URL, "http://my.msgwow.com/api/sendhttp.php?authkey=207485A7Y9ujYeSFT5ac45f4f&mobiles=$number&message=$msg&sender=CDACGP&route=1&country=91");

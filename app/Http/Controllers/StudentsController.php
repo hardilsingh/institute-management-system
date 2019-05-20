@@ -7,6 +7,9 @@ use App\Enrollment;
 use App\Http\Requests\enrollRequest;
 use App\Batch;
 use App\Course;
+use Excel;
+use App\Exports\StudentsViewExport;
+
 
 class StudentsController extends Controller
 {
@@ -18,8 +21,8 @@ class StudentsController extends Controller
     public function index()
     {
         //
-        $students = Enrollment::orderBy('created_at' , 'DESC')->paginate(10);
-        return view('admin.students.index' , compact('students') );
+        $students = Enrollment::orderBy('created_at', 'DESC')->paginate(10);
+        return view('admin.students.index', compact('students'));
     }
 
     /**
@@ -67,8 +70,8 @@ class StudentsController extends Controller
         //
         $courses = Course::all();
         $batches = Batch::all();
-        $student = Enrollment::where('slug' , $slug)->first();
-        return view('admin.students.edit' , compact(['student' ,'courses' , 'batches']));
+        $student = Enrollment::where('slug', $slug)->first();
+        return view('admin.students.edit', compact(['student', 'courses', 'batches']));
     }
 
     /**
@@ -98,5 +101,11 @@ class StudentsController extends Controller
         Enrollment::findOrFail($id)->delete();
         session()->flash('student_del', 'Student profile deleted successfully.');
         return redirect()->back();
+    }
+
+    public function export()
+    {
+        $type = 'xls';
+        return Excel::download(new StudentsViewExport, 'Students.'.$type);
     }
 }
