@@ -51,20 +51,10 @@ class EnrollmentContoller extends Controller
         $enroll->sms($enroll->tel_no , $enroll->reg_no);
 
         //create fee manager account automatically
-        $fee_id = FeeManager::create([
-            'enrollment_id' => $enroll->id,
-            'course_id' => $enroll->course_id,
-            'slug' => $enroll->slug,
-            'course_id_2'=>$enroll->course_id_2
-        ]);
+        $fee_id = Enrollment::createFeeManager($enroll->id , $enroll->course_id , $enroll->slug , $enroll->course_id_2);
 
         //create docs entry automatically
-
-        $docs = Docs::create([
-            'enrollment_id' => $enroll->id,
-            'course_id' => $enroll->course_id,
-            'course_id_2'=>$enroll->course_id_2
-        ]);
+        Enrollment::createDocs($enroll->id , $enroll->course_id , $enroll->course_id_2);
 
         if ($input['id']) {
             $enrolled = Enquiry::findOrFail($input['id']);

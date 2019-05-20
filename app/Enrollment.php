@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use App\FeeManager;
+use App\Docs;
 
 class Enrollment extends Model
 {
@@ -60,7 +62,7 @@ class Enrollment extends Model
         return $this->hasOne('App\FeeManager');
     }
 
-    public function sms($ph , $reg_id)
+    public function sms($ph, $reg_id)
     {
         $msg = "Welcome to cba infotech. Your registration number is " . $reg_id . ". Please keep this number for future refrence";
         $number = '91' . $ph;
@@ -69,5 +71,27 @@ class Enrollment extends Model
         curl_setopt($cSession, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($cSession, CURLOPT_HEADER, false);
         $alertchk = curl_exec($cSession);
+    }
+
+    public static function createFeeManager($id, $course_id, $slug, $course_id_2)
+    {
+        $fee_id = FeeManager::create([
+            'enrollment_id' => $id,
+            'course_id' => $course_id,
+            'slug' => $slug,
+            'course_id_2' => $course_id_2
+        ]);
+
+        return $fee_id;
+    }
+
+
+    public static function createDocs($id , $course_id , $course_id_2)
+    {
+        Docs::create([
+            'enrollment_id' => $id,
+            'course_id' => $course_id,
+            'course_id_2' => $course_id_2
+        ]);
     }
 }
