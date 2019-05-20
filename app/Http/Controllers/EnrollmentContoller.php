@@ -44,7 +44,7 @@ class EnrollmentContoller extends Controller
      */
     public function store(enrollRequest $request)
     {
-        //
+        //enroll student
         $input = $request->all();
         $input['reg_no'] = 'CBA/' . time();
         $enroll = Enrollment::create($input);
