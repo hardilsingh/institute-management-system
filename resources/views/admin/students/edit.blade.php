@@ -96,17 +96,6 @@
                 </select>
             </div>
         </div>
-        <div class="col-lg-3">
-            <div class="form-group">
-                <label for="">Course 2</label>
-                <select name="course_id_2" id="" class="form-control">
-                    <option value="{{$student->course2->id}}" selected>{{$student->course2->name}}</option>
-                    @foreach($courses as $course)
-                    <option value="{{$course->id}}">{{$course->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
 
         <div class="col-lg-3">
             <div class="form-group">
