@@ -43,6 +43,10 @@ class Enquiry extends Model
         return $this->belongsTo('App\Course' , 'course_id');
     }
 
+    public function course2() {
+        return $this->belongsTo('App\Course' , 'course_id_2');
+    }
+
     // public function sms($ph, $name , $follow_up)
     // {
     //     $msg = "Thankyou for contacting CBA Infotech " . $name . "We fill follow you up on " . $follow_up ;

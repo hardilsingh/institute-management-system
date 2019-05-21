@@ -23,11 +23,9 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Date</th>
                 <th scope="col">Course</th>
                 <th scope="col">Address</th>
                 <th scope="col">Telephone</th>
-                <th scope="col">Education</th>
                 <th scope="col">Follow up</th>
                 <th scope="col">Remarks</th>
                 <th scope="col">View</th>
@@ -46,11 +44,9 @@
                     @endphp
                 </td>
                 <td>{{$enquiry->name}}</td>
-                <td>{{$enquiry->created_at}}</td>
                 <td>{{$enquiry->course->name}}</td>
                 <td>{{substr($enquiry->address , 0 , 10)}}..</td>
                 <td>{{$enquiry->tel_no}}</td>
-                <td>{{$enquiry->edu}}</td>
                 <td>{{$enquiry->follow_up}}</td>
                 <td>{{substr($enquiry->remarks , 0 , 30)}}</td>
                 <td style="display:flex; justify-content:space-evenly; align-items:center">

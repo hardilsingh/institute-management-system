@@ -22,7 +22,7 @@ class EnquiriesController extends Controller
         //
         
         $courses = Course::all();
-        $enquiries = Enquiry::orderBy('created_at' , 'DESC')->paginate(10);
+        $enquiries = Enquiry::orderBy('created_at' , 'DESC')->paginate(20);
         return view('admin.enquiries.index' , compact(['enquiries' , 'courses']));
     }
 
