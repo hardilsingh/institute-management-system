@@ -95,8 +95,42 @@
 </div>
 
 <div class="row">
-    <div class="col-md-12">
-        <!-- <canvas id="myChart" width="100%" height="50px"></canvas> -->
+    <div class="col-md-6">
+        <div class="card card-stats">
+            <div class="card-body ">
+                <div class="row" style="display:flex; align-items:center">
+                    <h5 style="margin-left:10px">Notifications</h5>
+                    <h6 style="margin-left:10px">({{now()->toDatestring()}})</h6>
+                </div>
+                <div class="row" style="margin-left:10px">
+                    <table class="table text-uppercase">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Course</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                            $i = 1
+                            @endphp
+                            @foreach($students_comp as $student_comp)
+                            <tr>
+                                <td>
+                                    @php
+                                    echo $i++
+                                    @endphp
+                                </td>
+                                <td>{{$student_comp->name}}</td>
+                                <td>{{$student_comp->course->name}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
@@ -105,44 +139,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
 {!! $calendar->script() !!}
-<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script> -->
-<!-- <script>
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: [],
-            datasets: [{
-                label: 'No of students enrolled each month',
-                data: [{{count('students')}}],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-</script> -->
 @stop

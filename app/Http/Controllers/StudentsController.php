@@ -9,7 +9,9 @@ use App\Batch;
 use App\Course;
 use Excel;
 use App\Exports\StudentsViewExport;
-
+use Facades\jpmurray\LaravelCountdown\Countdown;
+use Illuminate\Support\Carbon;
+use App\FeeManager;
 
 class StudentsController extends Controller
 {
@@ -71,7 +73,7 @@ class StudentsController extends Controller
         $courses = Course::all();
         $batches = Batch::all();
         $student = Enrollment::where('slug', $slug)->first();
-        return view('admin.students.edit', compact(['student', 'courses', 'batches']));
+        return view('admin.students.edit', compact(['student', 'courses', 'batches', 'countdown']));
     }
 
     /**
@@ -84,7 +86,18 @@ class StudentsController extends Controller
     public function update(enrollRequest $request, $id)
     {
         //
-        Enrollment::findOrFail($id)->update($request->all());
+        $student = Enrollment::findOrFail($id);
+        $student->update($request->all());
+        $student->save([
+            $student->date_end_2 = Enrollment::endgame($student->date_join_2, $student->course2->duration),
+        ]);
+        if ($request->course_id_2) {
+            $fee_manager = FeeManager::where('enrollment_id', $id);
+            $fee_manager->update([
+                'course_id_2'=>$request->course_id_2,
+            ]);
+        }
+
         $request->session()->flash('std_updated', 'Student profile updated successfully');
         return redirect('/students');
     }
@@ -106,6 +119,6 @@ class StudentsController extends Controller
     public function export()
     {
         $type = 'xls';
-        return Excel::download(new StudentsViewExport, 'Students.'.$type);
+        return Excel::download(new StudentsViewExport, 'Students.' . $type);
     }
 }

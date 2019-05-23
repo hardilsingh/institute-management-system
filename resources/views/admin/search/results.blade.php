@@ -12,7 +12,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h5 class="text-success">Total Results: {{count($students)}}</h5>
+        <h5 class="text-success">Total Results: {{count($students)}} students</h5>
     </div>
 </div>
 
@@ -28,6 +28,8 @@
                 <th scope="col">Telephone</th>
                 <th scope="col">Regis. No</th>
                 <th scope="col">Action</th>
+                <th scope="col" class="text-center">Course 1</th>
+                <th scope="col" class="text-center">Course 2</th>
             </tr>
         </thead>
         <tbody>
@@ -51,6 +53,13 @@
 
                     <a href="{{route('feemanager.edit' , $student->feemanager_id->slug)}}" class="btn btn-warning">Fee Manager</a>
                 </td>
+                <td class="text-center text-danger" style="font-weight:bolder">{{Carbon\Carbon::parse($student->date_end)->diffInDays()}} days</td>
+                @if($student->date_end_2)
+                <td class="text-center text-danger" style="font-weight:bolder">{{Carbon\Carbon::parse($student->date_end_2)->diffInDays()}} days </td>
+                @endif
+                @if(!$student->date_end_2)
+                <td class="text-center text-danger" style="font-weight:bolder">N|A</td>
+                @endif
             </tr>
             @endforeach
         </tbody>

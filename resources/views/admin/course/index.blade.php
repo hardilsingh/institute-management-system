@@ -66,7 +66,7 @@
                     @endphp
                 </td>
                 <td>{{$course->name}}</td>
-                <td>{{$course->duration}}</td>
+                <td>{{$course->duration}} days</td>
                 <td>{{$course->hours}} hrs</td>
                 <td>₹ {{$course->fee}}</td>
                 <td>{{$course->centre->name}}</td>

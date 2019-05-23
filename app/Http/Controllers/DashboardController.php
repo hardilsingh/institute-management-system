@@ -11,11 +11,15 @@ use App\Docs;
 
 class DashboardController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
     public function index()
     {
         //
@@ -24,7 +28,7 @@ class DashboardController extends Controller
         if ($data->count()) {
             foreach ($data as $key => $value) {
                 $events[] = Calendar::event(
-                    $value->name.' '. $value->tel_no,
+                    $value->name . ' ' . $value->tel_no,
                     true,
                     new \DateTime($value->follow_up),
                     new \DateTime($value->follow_up . ' +1 day'),
@@ -32,7 +36,7 @@ class DashboardController extends Controller
                     // Add color and link on event
                     [
                         'color' => '#f05050',
-                        'url' => '/enquiry/'.$value->slug.'/edit',
+                        'url' => '/enquiry/' . $value->slug . '/edit',
                     ]
                 );
             }
@@ -42,8 +46,12 @@ class DashboardController extends Controller
         $students = Enrollment::all();
         $enquiries = Enquiry::all();
         $courses = Course::all();
-        $certificates = Docs::where('certificate' , '1')->get();
-        return view('admin.dashboard', compact(['students', 'enquiries', 'courses' , 'calendar' , 'certificates']));
+        $certificates = Docs::where('certificate', '1')->get();
+        $students_comp = Enrollment::where('date_end' , now()->toDateString())
+        ->orWhere('date_end_2' , now()->toDateString())
+        ->paginate();
+
+        return view('admin.dashboard', compact(['students', 'enquiries', 'courses', 'calendar', 'certificates' , 'students_comp' ]));
     }
 
     /**

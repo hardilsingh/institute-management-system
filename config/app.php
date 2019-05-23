@@ -164,6 +164,7 @@ return [
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        jpmurray\LaravelCountdown\CountdownServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -232,6 +233,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Calendar'=>MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Countdown' => jpmurray\LaravelCountdown\Facades\CountdownFacade::class,
 
     ],
 

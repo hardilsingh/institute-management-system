@@ -69,8 +69,14 @@
             </li>
             <li class="">
                 <a href="/docs">
-                <i class="fas fa-file-alt"></i>
+                    <i class="fas fa-file-alt"></i>
                     <p>Issued Docs</p>
+                </a>
+            </li>
+            <li class="">
+                <a href="/bulk_sms">
+                    <i class="fas fa-sms"></i>
+                    <p>Bulk SMS</p>
                 </a>
             </li>
 

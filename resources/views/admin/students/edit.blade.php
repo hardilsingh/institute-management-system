@@ -1,9 +1,33 @@
 @extends('layouts.admin')
 @section('content')
 
-<h5 class="display-4">
-    Edit Profile
-</h5>
+
+
+
+<div class="row" style="display:flex; align-items:center">
+    <div class="col-lg-5">
+        <h5 class="display-4">
+            Edit Profile
+        </h5>
+    </div>
+
+    <div class="col-lg-5" style="display:flex; justify-content:space-between">
+
+        <div class="alert alert-warning" style="color:darkred">
+            Course 1: {{Carbon\Carbon::parse($student->date_end)->diffInDays()}} days remaining!
+        </div>
+        <div class="alert alert-warning" style="color:darkred" style="margin-left:20px">
+            Course 2:
+            @if($student->date_end_2)
+            {{Carbon\Carbon::parse($student->date_end_2)->diffInDays()}} days remaining!
+            @endif
+            @if(!$student->date_end_2)
+            N|A
+            @endif
+        </div>
+    </div>
+</div>
+
 @include('includes.errors')
 
 {!! Form::model($student , [
@@ -12,6 +36,7 @@
 'method'=>'PATCH'
 
 ]) !!}
+
 
 {{csrf_field()}}
 <div class="col-lg-12">
@@ -72,7 +97,7 @@
     </div>
 
     <div class="row" style="margin:35px 0px">
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <div class="form-group">
                 <label for="">Batch</label>
                 <select name="batch_id" id="" class="form-control">
@@ -85,7 +110,7 @@
                 </select>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <div class="form-group">
                 <label for="">Course</label>
                 <select name="course_id" id="" class="form-control">
@@ -96,13 +121,29 @@
                 </select>
             </div>
         </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="">Course 2</label>
+                <select name="course_id_2" id="" class="form-control">
+                    @if($student->course_id_2)
+                    <option value="{{$student->course2->id}}" selected>{{$student->course2->name}}</option>
+                    @endif
+                    @if(!$student->course_id_2)
+                    <option value="" selected>Select course 2</option>
+                    @endif
+                    @foreach($courses as $course)
+                    <option value="{{$course->id}}">{{$course->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
 
-        <div class="col-lg-3">
+        <!-- <div class="col-lg-3">
             <div class="form-group">
                 <label for="">Date of addmission</label>
                 {!! Form::date('date_join' , null , ['class'=>'form-control']) !!}
             </div>
-        </div>
+        </div> -->
 
 
 

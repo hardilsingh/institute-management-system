@@ -95,6 +95,8 @@
                     <input type="hidden" name="batch_id" value="{{$enquiry->batch_id}}">
                     <input type="hidden" name="course_id" value="{{$enquiry->course_id}}">
                     <input type="hidden" name="course_id_2" value="{{$enquiry->course_id_2}}">
+                    <input type="hidden" name="date_join" value="{{now()->toDateString()}}">
+                    <input type="hidden" name="date_join_2" value="{{now()->toDateString()}}">
                     {!! Form::submit('Enroll' , ['class'=>'btn btn-warning']) !!}
                     {!! Form::close() !!}
                     @endif

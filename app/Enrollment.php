@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use App\FeeManager;
 use App\Docs;
+use Illuminate\Support\Carbon;
 
 class Enrollment extends Model
 {
@@ -25,7 +26,10 @@ class Enrollment extends Model
         'refer_mode',
         'reg_no',
         'date_join',
-        'course_id_2'
+        'course_id_2',
+        'date_end',
+        'date_end_2',
+        'date_join_2'
     ];
 
     use Sluggable;
@@ -86,12 +90,31 @@ class Enrollment extends Model
     }
 
 
-    public static function createDocs($id , $course_id , $course_id_2)
+    public static function createDocs($id, $course_id, $course_id_2)
     {
         Docs::create([
             'enrollment_id' => $id,
             'course_id' => $course_id,
             'course_id_2' => $course_id_2
         ]);
+    }
+
+
+    public static function endgame($date_join, $course_duration)
+    {
+        $start_date = Carbon::parse($date_join);
+        $end_date = $start_date->addDays($course_duration);
+
+        return $end_date;
+    }
+
+
+
+    public function calculateLeftDays($date_join , $date_end)
+    {
+        $start_date = Carbon::parse($date_join);
+        $end_date = Carbon::parse($date_end);
+        $diff = $start_date->diffInDays($end_date);
+        return $diff;
     }
 }

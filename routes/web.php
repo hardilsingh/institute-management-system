@@ -1,6 +1,9 @@
 <?php
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Auth;
+use App\Notifications\TestNotify;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +34,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::resource('/admin', 'DashboardController');
     Route::get('/reciept/{id}', 'RecieptController@show');
     Route::resource('/course', 'CoursesController');
+    Route::get('/sendNotification', 'EnrollmentContoller@sendNotification');
     Route::resource('/enroll', 'EnrollmentContoller');
     Route::get('/students/downloadExcel', 'StudentsController@export');
     Route::resource('/students', 'StudentsController');
@@ -44,5 +48,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::resource('/searchenquiry', 'SearchEnquiryController');
     Route::resource('/inventory', 'InventoryController');
     Route::resource('/docs', 'DocsController');
+    Route::resource('/bulk_sms', 'BulkSmsController');
 });
 

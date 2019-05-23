@@ -13,6 +13,10 @@ use App\Enquiry;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\StudentEnrolled;
 use App\Docs;
+use CalculateTimeDiff;
+use Notification;
+use App\Notifications\MyFirstNotification;
+use Illuminate\Support\Facades\Auth;
 
 class EnrollmentContoller extends Controller
 {
@@ -47,14 +51,21 @@ class EnrollmentContoller extends Controller
         //enroll student
         $input = $request->all();
         $input['reg_no'] = 'CBA/' . time();
-        $enroll = Enrollment::create($input);
-        $enroll->sms($enroll->tel_no , $enroll->reg_no);
+        $enroll = Enrollment::create($input); 
+        $enroll->save([
+            $enroll->date_end = Enrollment::endgame($enroll->date_join, $enroll->course->duration ),
+            $enroll->date_end_2 = $enroll->course_id_2 ? Enrollment::endgame($enroll->date_join_2, $enroll->course2->duration) : null ,
+
+        ]);
+
+
+        $enroll->sms($enroll->tel_no, $enroll->reg_no);
 
         //create fee manager account automatically
-        $fee_id = Enrollment::createFeeManager($enroll->id , $enroll->course_id , $enroll->slug , $enroll->course_id_2);
+        $fee_id = Enrollment::createFeeManager($enroll->id, $enroll->course_id, $enroll->slug, $enroll->course_id_2);
 
         //create docs entry automatically
-        Enrollment::createDocs($enroll->id , $enroll->course_id , $enroll->course_id_2);
+        Enrollment::createDocs($enroll->id, $enroll->course_id, $enroll->course_id_2);
 
         if ($input['id']) {
             $enrolled = Enquiry::findOrFail($input['id']);
@@ -111,4 +122,11 @@ class EnrollmentContoller extends Controller
     {
         //
     }
+
+
+    // public function sendNotifications() {
+
+    //     $user = Auth::user();
+
+    // }
 }
