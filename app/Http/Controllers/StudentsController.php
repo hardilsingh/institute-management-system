@@ -92,9 +92,14 @@ class StudentsController extends Controller
             $student->date_end_2 = Enrollment::endgame($student->date_join_2, $student->course2->duration),
         ]);
         if ($request->course_id_2) {
-            $fee_manager = FeeManager::where('enrollment_id', $id);
+            $fee_manager = FeeManager::where('enrollment_id', $id)->first();
+            $newBalance = $student->course2->fee + ($fee_manager->course_id_2 ? $fee_manager->balance - $fee_manager->course2->fee : $fee_manager->balance );
+            $total_fee = $student->course2->fee + ($fee_manager->course_id_2 ? $fee_manager->discounted_fee - $fee_manager->course2->fee : $fee_manager->discounted_fee );
+
             $fee_manager->update([
-                'course_id_2'=>$request->course_id_2,
+                'course_id_2' => $request->course_id_2,
+                'balance' => $newBalance,
+                'discounted_fee'=>$total_fee,
             ]);
         }
 

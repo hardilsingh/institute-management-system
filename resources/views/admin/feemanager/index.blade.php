@@ -52,8 +52,12 @@
                 </td>
                 <td>{{$fee->student->name}}</td>
                 <td>{{$fee->student->reg_no}}</td>
-                <td>{{$fee->course->name}}</td>
-                <td>₹ {{$fee->course->fee}}</td>
+                <td>{{$fee->course->name}}
+                    @if($fee->course2)
+                    ,{{$fee->course2->name}}
+                    @endif
+                </td>
+                <td>₹ {{$fee->course2 ? $fee->course->fee + $fee->course2->fee : $fee->course->fee}}</td>
                 <td>₹ {{$fee->paid_fee}}</td>
                 <td>₹
                     @if($fee->balance == 0)

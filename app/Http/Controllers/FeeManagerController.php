@@ -18,7 +18,7 @@ class FeeManagerController extends Controller
     public function index()
     {
         //
-        $fees = FeeManager::orderBy('created_at' , 'DESC')->paginate(10);
+        $fees = FeeManager::orderBy('created_at', 'DESC')->paginate(10);
         return view('admin.feemanager.index', compact('fees'));
     }
 
@@ -63,9 +63,9 @@ class FeeManagerController extends Controller
     public function edit($slug)
     {
         //
-        $student = FeeManager::where('slug' , $slug)->first();
-        $feeReciepts = Reciept::where('enrollment_id' , $student->enrollment_id)->get();
-        return view('admin.feemanager.edit', compact(['student' , 'feeReciepts']));
+        $student = FeeManager::where('slug', $slug)->first();
+        $feeReciepts = Reciept::where('enrollment_id', $student->enrollment_id)->get();
+        return view('admin.feemanager.edit', compact(['student', 'feeReciepts']));
     }
 
     /**
@@ -78,6 +78,7 @@ class FeeManagerController extends Controller
     public function update(UpdateFeeRequest $request, $id)
     {
         //
+        $update_fee = FeeManager::findOrFail($id);
         $input = $request->all();
         if ($input['discounted_fee'] == null) {
             $input['discounted_fee'] = ($input['total_fee'] + $input['total_fee1']) - $input['discount'];
@@ -86,9 +87,11 @@ class FeeManagerController extends Controller
             $input['balance'] = $input['balance'] - $input['paid_fee'];
         }
 
-        $update_fee = FeeManager::findOrFail($id);
+
+        
+
         $update_fee->update($input);
-        $update_fee->sms( $update_fee->student->tel_no  ,$update_fee->paid_fee , $update_fee->balance , $update_fee->due_date );
+        $update_fee->sms($update_fee->student->tel_no, $update_fee->paid_fee, $update_fee->balance, $update_fee->due_date);
         $request->session()->flash('fee_updated', 'Fee updated successfully.');
 
         $create_reciept = new Reciept([
@@ -97,7 +100,7 @@ class FeeManagerController extends Controller
             'balance' => $input['balance'],
             'discount' => $input['discount'],
             'paid_fee' => $input['paid_fee'],
-            'due_date'=>$input['due_date']
+            'due_date' => $input['due_date']
         ]);
         $update_fee->feereciept()->save($create_reciept);
 
@@ -116,8 +119,9 @@ class FeeManagerController extends Controller
     }
 
 
-    public function checkdues() {
-        $fees = FeeManager::where('balance' , '>' , '0')->orderBy('created_at' , 'DESC')->paginate(10);
+    public function checkdues()
+    {
+        $fees = FeeManager::where('balance', '>', '0')->orderBy('created_at', 'DESC')->paginate(10);
         return view('admin.feemanager.dues', compact('fees'));
     }
 }

@@ -48,7 +48,7 @@ class EnquiriesController extends Controller
     public function store(CreateEnquiry $request)
     {
         //
-        $enquiry = Enquiry::create($request->all());
+        Enquiry::create($request->all());
         $request->session()->flash('enquiry_created', 'Enquiry created successfully');
         return redirect('/enquiry');
     }

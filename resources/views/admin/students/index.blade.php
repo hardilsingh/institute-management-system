@@ -4,6 +4,7 @@
 <h5 class="display-4" style="margin-bottom:50px">
     Students
 </h5>
+
 @if(Session::has('student_enrolled'))
 <div class="row">
     <div class="col-lg-5">
@@ -35,11 +36,17 @@
     </div>
 </div>
 @endif
-
+@if(count($students))
 <div class="col-lg-6" style="margin-bottom:50px">
     <a href="/students/downloadExcel" class="btn btn-primary btn-lg">Export excel file</a>
-
 </div>
+@endif
+
+@if(!count($students))
+<div class="col-lg-6" style="margin-bottom:50px">
+    <a href="/students/downloadExcel" class="btn btn-primary btn-lg" disabled>Export excel file</a>
+</div>
+@endif
 
 
 <div class="col-lg-12">

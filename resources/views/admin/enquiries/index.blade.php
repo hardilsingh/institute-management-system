@@ -5,7 +5,6 @@
     <div class="col-lg-12">
         <h5 class="display-4">
             Enquiries
-
         </h5>
     </div>
 </div>
@@ -15,11 +14,16 @@
     <div class="col-lg-2">
         <a href="{{route('enquiry.create')}}" class="btn btn-primary btn-lg">Create</a>
     </div>
-
+    @if(count($enquiries))
     <div class="col-lg-2" style="margin-bottom:50px">
         <a href="/enquiry/downloadExcel" class="btn btn-warning btn-lg">Export excel file</a>
-
     </div>
+    @endif
+    @if(!count($enquiries))
+    <div class="col-lg-2" style="margin-bottom:50px">
+        <a href="/enquiry/downloadExcel" class="btn btn-warning btn-lg" disabled>Export excel file</a>
+    </div>
+    @endif
 </div>
 
 
@@ -115,12 +119,5 @@
         </ul>
     </nav>
 </div>
-
-
-
-
-
-
-
 
 @endsection
