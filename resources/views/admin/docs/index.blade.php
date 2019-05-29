@@ -13,16 +13,6 @@
     </div>
 </div>
 
-<!-- <div class="row" style="margin-bottom:50px">
-    <div class="col-lg-5">
-        <form action="" method="get">
-            <div class="form-group" style="display:flex; align-items:center;">
-                <input type="text" name="search_doc" id="" class="form-control" placeholder="Enter name, registration number, phone number">
-                <input type="submit" value="Search" class="btn btn-success" style="margin-left:20px">
-            </div>
-        </form>
-    </div>
-</div> -->
 
 @if(Session::has('updated'))
 <div class="row">
@@ -41,7 +31,6 @@
                 <th scope="col">Course</th>
                 <th scope="col">Reg no</th>
                 <th scope="col">Id Card</th>
-                <th scope="col">Books</th>
                 <th scope="col">Certificate</th>
                 <th scope="col">Update</th>
             </tr>
@@ -66,7 +55,6 @@
                 <td>{{$doc->course->name}} ..</td>
                 <td>{{$doc->student->reg_no}}</td>
                 <td>{!! Form::select('id_card' , array('0'=>'not issued' , '1'=>'issued') , $doc->id_card , ['class'=>'form-control text-capitalize'] ) !!}</td>
-                <td>{!! Form::select('books' , array('0'=>'not issued' , '1'=>'issued') , $doc->books , ['class'=>'form-control text-capitalize'] ) !!}</td>
                 <td>{!! Form::select('certificate' , array('0'=>'not issued' , '1'=>'issued') , $doc->certificate , ['class'=>'form-control text-capitalize'] ) !!}
                     @if($doc->certificate == 1)
                     {!! Form::text('certificate_number' , null , ['class'=>'form-control' , 'placeholder'=>'Certificate Number' ,'style'=>'margin-top:10px']) !!}

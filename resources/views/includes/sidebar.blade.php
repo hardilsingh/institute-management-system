@@ -79,6 +79,12 @@
                     <p>Bulk SMS</p>
                 </a>
             </li>
+            <li class="">
+                <a href="/books">
+                    <i class="fas fa-atlas"></i>
+                    <p>Books</p>
+                </a>
+            </li>
 
         </ul>
     </div>

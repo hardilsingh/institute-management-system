@@ -62,7 +62,7 @@
                 <th scope="col">Action</th>
                 <th scope="col" class="text-center">Course 1</th>
                 <th scope="col" class="text-center">Course 2</th>
-                
+
             </tr>
         </thead>
         <tbody>
@@ -87,16 +87,20 @@
                 <td>{{$student->tel_no}}</td>
                 <td>{{$student->reg_no}}</td>
                 <td style="display:flex; justify-content:space-evenly">
-                    <a href="{{route('students.edit' , $student->slug)}}" class="btn btn-success">Edit</a>
 
-                    {!! Form::model($student , [
+                    <a href="{{route('students.show' , $student->id)}}" class="btn btn-warning">View</a>
+
+                    <a href="{{route('feemanager.edit' , $student->feemanager_id->slug)}}" class="btn btn-primary">Fee Manager</a>
+
+
+                    <!-- {!! Form::model($student , [
                     'action'=>['StudentsController@destroy' , $student->id],
                     'method'=>'DELETE',
                     ]) !!}
 
                     {!! Form::submit('Delete' , ['class'=>'btn btn-danger']) !!}
 
-                    {!! Form::close() !!}
+                    {!! Form::close() !!} -->
 
                     <!-- <a href="{{route('feemanager.edit' , $student->id)}}" class="btn btn-warning">Manage</a> -->
                 </td>

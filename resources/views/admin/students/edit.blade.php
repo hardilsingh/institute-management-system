@@ -151,8 +151,8 @@
     <div class="row" style="margin:35px 0px">
         <div class="col-lg-4">
             <div class="form-group">
-                @if($student->course->centre_id == 2)
-                <label for="">CDAC registration no:</label>
+                @if($student->course->centre_id == 2 || $student->course2->centre_id == 2 )
+                <label for="">CDAC registration no: ({{$student->course2->name}})</label>
                 {!! Form::text('reg_no' , null , ['class'=>'form-control']) !!}
                 @endif
             </div>
@@ -168,6 +168,7 @@
 </div>
 
 {!! Form::close() !!}
+
 
 
 

@@ -49,9 +49,9 @@
                 <td>{{$student->tel_no}}</td>
                 <td>{{$student->reg_no}}</td>
                 <td style="display:flex; justify-content:space-evenly">
-                    <a href="{{route('students.edit' , $student->slug)}}" class="btn btn-success">Edit</a>
+                    <a href="{{route('students.show' , $student->id)}}" class="btn btn-warning">View</a>
 
-                    <a href="{{route('feemanager.edit' , $student->feemanager_id->slug)}}" class="btn btn-warning">Fee Manager</a>
+                    <a href="{{route('feemanager.edit' , $student->feemanager_id->slug)}}" class="btn btn-primary">Fee Manager</a>
                 </td>
                 <td class="text-center text-danger" style="font-weight:bolder">{{Carbon\Carbon::parse($student->date_end)->diffInDays()}} days</td>
                 @if($student->date_end_2)

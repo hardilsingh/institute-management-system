@@ -12,6 +12,8 @@ use App\Exports\StudentsViewExport;
 use Facades\jpmurray\LaravelCountdown\Countdown;
 use Illuminate\Support\Carbon;
 use App\FeeManager;
+use App\Book;
+use App\Issued;
 
 class StudentsController extends Controller
 {
@@ -46,6 +48,17 @@ class StudentsController extends Controller
     public function store(Request $request)
     {
         //
+
+        $input = $request->all();
+        Issued::create($input);
+        $request->session()->flash('book_issued', 'Book Issued Successfully');
+
+        $book = Book::findOrFail($input['book_id']);
+        $book->update([
+            'stock'=>$book->stock -1,
+        ]);
+
+        return redirect()->back();
     }
 
     /**
@@ -57,8 +70,10 @@ class StudentsController extends Controller
     public function show($id)
     {
         //
-        $student = Enrollment::findOrFail($id)->first();
-        return view('admin.students.profile');
+        $student= Enrollment::findOrFail($id)->first();
+        $issued_books = Issued::where('enrollment_id' , $student->id)->get();
+        $books = Book::pluck('name' , 'id');
+        return view('admin.students.view' , compact(['student' , 'issued_books' , 'books']));
     }
 
     /**
@@ -93,13 +108,13 @@ class StudentsController extends Controller
         ]);
         if ($request->course_id_2) {
             $fee_manager = FeeManager::where('enrollment_id', $id)->first();
-            $newBalance = $student->course2->fee + ($fee_manager->course_id_2 ? $fee_manager->balance - $fee_manager->course2->fee : $fee_manager->balance );
-            $total_fee = $student->course2->fee + ($fee_manager->course_id_2 ? $fee_manager->discounted_fee - $fee_manager->course2->fee : $fee_manager->discounted_fee );
+            $newBalance = $student->course2->fee + ($fee_manager->course_id_2 ? $fee_manager->balance - $fee_manager->course2->fee : $fee_manager->balance);
+            $total_fee = $student->course2->fee + ($fee_manager->course_id_2 ? $fee_manager->discounted_fee - $fee_manager->course2->fee : $fee_manager->discounted_fee);
 
             $fee_manager->update([
                 'course_id_2' => $request->course_id_2,
                 'balance' => $newBalance,
-                'discounted_fee'=>$total_fee,
+                'discounted_fee' => $total_fee,
             ]);
         }
 
@@ -126,4 +141,9 @@ class StudentsController extends Controller
         $type = 'xls';
         return Excel::download(new StudentsViewExport, 'Students.' . $type);
     }
+
+
+
+
+
 }
