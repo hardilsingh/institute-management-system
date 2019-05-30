@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Book;
+use App\Http\Requests\BooksRequest;
 
 class BooksController extends Controller
 {
@@ -36,7 +37,7 @@ class BooksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BooksRequest $request)
     {
         //
 
@@ -79,10 +80,15 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BooksRequest $request, $id)
     {
         //
-        Book::findOrFail($id)->update($request->all());
+        $input = $request->all();
+        $book = Book::findOrFail($id);
+        $book->update([
+            'total'=>$input['total'] + $book->total,
+            'stock'=>$book->stock + $input['total'],
+        ]);
         $request->session()->flash('book_updated', 'Book updated successfully');
         return redirect('/books');
     }

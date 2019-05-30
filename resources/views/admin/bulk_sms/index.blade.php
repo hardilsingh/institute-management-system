@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+@include('includes.errors')
 
 <div class="row" style="margin-bottom:30px">
     <div class="col-lg-12">

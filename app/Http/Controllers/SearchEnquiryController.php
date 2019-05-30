@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Enquiry;
+use App\Http\Requests\SearchEnquiryRequest;
 
 class SearchEnquiryController extends Controller
 {
@@ -15,7 +16,7 @@ class SearchEnquiryController extends Controller
         return view('admin.search_enquiry.index');
     }
 
-    public function search(Request $request)
+    public function search(SearchEnquiryRequest $request)
     {
         $item = $request->all();
         $enquiries = Enquiry::where('name', 'like', '%' . $item['search_result'] . '%')

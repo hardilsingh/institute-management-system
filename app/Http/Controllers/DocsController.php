@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Docs;
+use App\Http\Requests\SearchDocsRequest;
 
 class DocsController extends Controller
 {
@@ -15,8 +16,7 @@ class DocsController extends Controller
     public function index()
     {
         //
-        $docs = Docs::paginate(10);
-        return view('admin.docs.index' , compact('docs'));
+        return view('admin.docs.index');
     }
 
     /**
@@ -87,4 +87,15 @@ class DocsController extends Controller
     {
         //
     }
+
+
+    public function search(SearchDocsRequest $request) {
+        $docs = Docs::whereHas('student', function ($query) use($request) {
+            $item = $request->all();
+            $query->where('name', 'like', '%' . $item['keyword'] . '%')
+            ->orWhere('tel_no', 'like', '%' . $item['keyword'] . '%')
+            ->orWhere('reg_no', 'like', '%' . $item['keyword'] . '%');
+        })->get();
+        return view('admin.docs.index', compact(['docs']));
+    } 
 }

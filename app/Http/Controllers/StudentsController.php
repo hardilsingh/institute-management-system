@@ -141,9 +141,4 @@ class StudentsController extends Controller
         $type = 'xls';
         return Excel::download(new StudentsViewExport, 'Students.' . $type);
     }
-
-
-
-
-
 }

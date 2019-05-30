@@ -7,6 +7,7 @@ use App\Enrollment;
 use App\FeeManager;
 use App\Http\Requests\SearchStudent;
 use App\Docs;
+use App\Http\Requests\SearchProfileRequest;
 
 class SearchStudentController extends Controller
 {
@@ -87,7 +88,7 @@ class SearchStudentController extends Controller
         //
     }
 
-    public function search(SearchStudent $request)
+    public function search(SearchProfileRequest $request)
     {
         $item = $request->all();
         $students = Enrollment::where('name', 'like', '%' . $item['search_result'] . '%')

@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+@include('includes.errors')
 
 <div class="col-sm-9 col-md-9 col-lg-6 mx-auto" role="columnheader">
     <!-- main content -->

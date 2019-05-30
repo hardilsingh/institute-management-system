@@ -17,8 +17,13 @@ class Admin
     public function handle($request, Closure $next)
     {
         if (Auth::check()) {
-            return $next($request);
-        }else {
+
+            if (Auth::user()->is_active == 1) {
+                return $next($request);
+            } else {
+                return abort(404);
+            }
+        } else {
             return abort(404);
         }
     }

@@ -43,37 +43,39 @@ Route::group(['middleware' => 'admin'], function () {
     Route::resource('/course', 'CoursesController');
 
     Route::get('/sendNotification', 'EnrollmentContoller@sendNotification');
-    
+
     Route::resource('/enroll', 'EnrollmentContoller');
-    
+
     Route::get('/students/downloadExcel', 'StudentsController@export');
-        
+
     Route::resource('/students', 'StudentsController');
-    
-    Route::get('/dues', 'FeeManagerController@checkdues' );
-    
+
+    Route::get('/dues', 'FeeManagerController@checkdues');
+
     Route::resource('/feemanager', 'FeeManagerController');
-    
+
     Route::get('/enquiry/downloadExcel', 'EnquiriesController@export');
-    
+
     Route::resource('/enquiry', 'EnquiriesController');
-    
+
     Route::get('profile/search', 'SearchStudentController@search');
-    
+
     Route::resource('/profile', 'SearchStudentController');
-    
+
     Route::get('/searchenquiry/search', 'SearchEnquiryController@search');
-    
-    
+
     Route::resource('/searchenquiry', 'SearchEnquiryController');
-    
+
+
     Route::resource('/inventory', 'InventoryController');
-    
+
+
+    Route::get('/docs/search', 'DocsController@search');
+
+
     Route::resource('/docs', 'DocsController');
-    
+
     Route::resource('/bulk_sms', 'BulkSmsController');
-    
+
     Route::resource('/books', 'BooksController');
-
 });
-

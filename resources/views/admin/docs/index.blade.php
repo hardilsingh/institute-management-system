@@ -1,9 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-@section('styles')
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
-
-@stop
+@include('includes.errors')
 
 <div class="row" style="margin-bottom:50px">
     <div class="col-lg-12">
@@ -14,6 +11,8 @@
 </div>
 
 
+
+
 @if(Session::has('updated'))
 <div class="row">
     <div class="col-lg-5">
@@ -21,6 +20,45 @@
     </div>
 </div>
 @endif
+
+
+<div class="col-sm-9 col-md-9 col-lg-6 mx-auto" role="columnheader">
+    <!-- main content -->
+    <div class="card card-signin my-5">
+        <!-- card content -->
+        <div class="card-body" style="padding:60px 20px">
+            <h5 class="card-title text-center text-success" role="heading">Search Document</h5>
+            <!-- form -->
+
+            {!! Form::open([
+                
+                'action'=>'DocsController@search',
+                'method'=>'GET'
+                
+                ]) !!}
+
+                <div class="row" style="margin-bottom:30px; margin-top:30px">
+                    <div class="col-sm-9 col-md-9 col-lg-8 mx-auto">
+                        <div class="form-label-group">
+                            {!! Form::label('keyword' , 'Enter search item:' , ['style'=>'font-size:16px']) !!}
+                            {!! Form::text('keyword' , null , ['class'=>'form-control ' , 'placeholder'=>'Enter Phone no, Name, Registration no' , 'style'=>'padding:10px']) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-9 col-md-9 col-lg-8 mx-auto text-center">
+                        {!! Form::submit('Search &rarr;' , ['class'=>'btn btn-success']) !!}
+                    </div>
+                </div>
+            </form>
+            <!-- /.form -->
+        </div>
+        <!-- /.card content -->
+    </div>
+    <!-- /.main content -->
+</div>
+
+
 
 <div class="col-lg-12">
     <table class="table table-hover text-capitalize">
@@ -36,7 +74,8 @@
             </tr>
         </thead>
         <tbody>
-            @if(count($docs) > 0)
+            @if(isset($_GET['keyword']))
+
             @php
             $i = 1
             @endphp
@@ -67,11 +106,6 @@
             @endif
         </tbody>
     </table>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            {{$docs->render()}}
-        </ul>
-    </nav>
 </div>
 
 @endsection

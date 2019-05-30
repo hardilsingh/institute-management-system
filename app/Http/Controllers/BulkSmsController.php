@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\BulkSms;
 use App\Enrollment;
+use App\Http\Requests\BulkSmsRequest;
 
 class BulkSmsController extends Controller
 {
@@ -36,7 +37,7 @@ class BulkSmsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BulkSmsRequest $request)
     {
         //
         $students = Enrollment::all();
