@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../img/reciept_logo_black.png" type="image/x-icon">
+
 
     <title>Laravel</title>
 

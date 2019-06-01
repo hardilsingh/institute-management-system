@@ -50,7 +50,7 @@
 
 <div class="col-lg-12">
     <table class="table table-hover text-capitalize">
-        <thead>
+        <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
@@ -75,7 +75,11 @@
                     @endphp
                 </td>
                 <td>{{$enquiry->name}}</td>
-                <td>{{$enquiry->course->name}}</td>
+                <td>{{$enquiry->course->name}}
+                    @if($enquiry->course2)
+                    , {{$enquiry->course2->name}}
+                    @endif
+                </td>
                 <td>{{substr($enquiry->address , 0 , 10)}}..</td>
                 <td>{{$enquiry->tel_no}}</td>
                 <td>{{$enquiry->follow_up}}</td>
@@ -105,7 +109,7 @@
                     {!! Form::close() !!}
                     @endif
                     @if($enquiry->enrolled == 1 )
-                    <span style="font-weight:bold">Enrolled</span>
+                    <span style="font-weight:bold; color:green; font-size:22px"><i class="fas fa-check-circle"></i></span>
                     @endif
                 </td>
             </tr>

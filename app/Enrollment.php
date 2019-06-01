@@ -29,7 +29,9 @@ class Enrollment extends Model
         'course_id_2',
         'date_end',
         'date_end_2',
-        'date_join_2'
+        'date_join_2',
+        'completed_1',
+        'completed_2',
     ];
 
     use Sluggable;

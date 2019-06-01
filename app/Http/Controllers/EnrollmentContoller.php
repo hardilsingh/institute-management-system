@@ -8,14 +8,10 @@ use App\Course;
 use App\Enrollment;
 use App\Http\Requests\enrollRequest;
 use App\FeeManager;
-use Illuminate\Support\Facades\DB;
 use App\Enquiry;
-use Illuminate\Support\Facades\Mail;
 use App\Mail\StudentEnrolled;
 use App\Docs;
-use CalculateTimeDiff;
 use Notification;
-use App\Notifications\MyFirstNotification;
 use Illuminate\Support\Facades\Auth;
 
 class EnrollmentContoller extends Controller

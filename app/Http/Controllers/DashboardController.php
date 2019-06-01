@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Enrollment;
 use App\Enquiry;
 use App\Course;
@@ -20,9 +19,10 @@ class DashboardController extends Controller
 
 
 
+
     public function index()
     {
-        //
+
         $events = [];
         $data = Enquiry::all();
         if ($data->count()) {
@@ -33,7 +33,7 @@ class DashboardController extends Controller
                     new \DateTime($value->follow_up),
                     new \DateTime($value->follow_up . ' +1 day'),
                     null,
-                    // Add color and link on event
+                    //Add color and link on event
                     [
                         'color' => '#f05050',
                         'url' => '/enquiry/' . $value->slug . '/edit',
@@ -43,80 +43,28 @@ class DashboardController extends Controller
         }
 
         $calendar = Calendar::addEvents($events);
-        $students = Enrollment::all();
-        $enquiries = Enquiry::all();
-        $courses = Course::all();
-        $certificates = Docs::where('certificate', '1')->get();
-        $students_comp = Enrollment::where('date_end' , now()->toDateString())
-        ->orWhere('date_end_2' , now()->toDateString())
-        ->paginate();
+        $students = Enrollment::count();
+        $enquiries = Enquiry::count();
+        $courses = Course::count();
+        $certificates = Docs::where('certificate', '1')->count();
+        $students_comp = Enrollment::where('date_end', now()->toDateString())->orWhere('date_end_2', now()->toDateString())
+            ->get();
 
-        return view('admin.dashboard', compact(['students', 'enquiries', 'courses', 'calendar', 'certificates' , 'students_comp' ]));
-    }
+        foreach ($students_comp as $student) {
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+            if ($student->date_end == now()->toDateString()) {
+                $student->update([
+                    'completed_1' => 1,
+                ]);
+            }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+            if ($student->date_end_2 == now()->toDateString()) {
+                $student->update([
+                    'completed_2' => 1,
+                ]);
+            }
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Enquiry  $enquiry
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Enquiry $enquiry)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Enquiry  $enquiry
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Enquiry $enquiry)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Enquiry  $enquiry
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Enquiry $enquiry)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Enquiry  $enquiry
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Enquiry $enquiry)
-    {
-        //
+        return view('admin.dashboard', compact(['students', 'enquiries', 'courses', 'calendar', 'certificates', 'students_comp']));
     }
 }

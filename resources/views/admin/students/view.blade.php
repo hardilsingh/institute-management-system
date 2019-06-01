@@ -1,6 +1,11 @@
 @extends('layouts.admin')
+
 @section('content')
 
+@include('includes.errors')
+
+
+<!-- information -->
 <div class="col-lg-12">
     <div class="row">
         <div class="col-lg-12">
@@ -11,7 +16,20 @@
                         <tbody>
                             <tr>
                                 <td>Course 1:</td>
-                                <td>{{$student->course->name}}</td>
+                                <td>{{$student->course->name}}
+                                    <span style="margin-left:80px; font-weight:bolder; color:darkred; font-size:20px">
+                                        @if($student->completed_1 == 1)
+                                        Completed
+                                        @endif
+
+                                        @if($student->completed_1 !== 1)
+                                        {{Carbon\Carbon::parse($student->date_end)->diffInDays()}} days remaining!
+
+                                        @endif
+
+                                    </span>
+
+                                </td>
                             </tr>
                             <tr>
                                 <td>Course 2:</td>
@@ -22,6 +40,22 @@
                                     @if(!$student->course2)
                                     Not Enrolled
                                     @endif
+                                    <span style="margin-left:80px; font-weight:bolder; color:darkred; font-size:20px">
+                                        @if($student->completed_2 == 1)
+                                        Completed
+                                        @endif
+
+                                        @if($student->completed_2 !== 1)
+                                        @if($student->date_end_2)
+                                        {{Carbon\Carbon::parse($student->date_end_2)->diffInDays()}} days remaining!
+                                        @endif
+                                        @if(!$student->date_end_2)
+                                        N|A
+                                        @endif
+                                        @endif
+
+                                    </span>
+
                                 </td>
                             </tr>
                             <tr>
@@ -46,14 +80,19 @@
                             </tr>
                         </tbody>
                     </table>
-                    <a href="{{route('students.edit' , $student->slug)}}" class="btn btn-primary">Edit</a>
+                    @if($student->completed_1 !== 1 || $student->completed_2 !== 1)
+                    <a href="{{route('students.edit' , $student->slug)}}"  class="btn btn-primary">Edit</a>
+                    @endif
+                    @if($student->completed_1 == 1 && $student->completed_2 == 1)
+                    <a href="{{route('students.edit' , $student->slug)}}" disabled class="btn btn-primary">Edit</a>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
+<!-- Books issue -->
 <div class="col-lg-12">
     <div class="row">
         <div class="col-lg-12">
@@ -122,6 +161,46 @@
                                 </td>
                                 <td>
                                     {{$book->created_at->toDateString()}}
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- payment History -->
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                    <h5>Payment History</h5>
+
+
+
+                    <table class="table text-capitalize">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Payment of</th>
+                                <th>Reciept</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($reciepts as $reciept)
+                            <tr>
+                                <td>{{$reciept->student->name}}</td>
+                                <td>{{$reciept->created_at->toDateString()}}</td>
+                                <td>₹ {{$reciept->paid_fee}}</td>
+                                <td>
+                                    <a href="/reciept/{{$reciept->id}}" target="_blank" class="btn btn-primary">Reciept</a>
                                 </td>
                             </tr>
                             @endforeach

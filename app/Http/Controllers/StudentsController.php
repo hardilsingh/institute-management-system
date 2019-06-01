@@ -14,6 +14,8 @@ use Illuminate\Support\Carbon;
 use App\FeeManager;
 use App\Book;
 use App\Issued;
+use App\Http\Requests\IssueBookRequest;
+use App\Reciept;
 
 class StudentsController extends Controller
 {
@@ -45,7 +47,7 @@ class StudentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IssueBookRequest $request)
     {
         //
 
@@ -73,7 +75,12 @@ class StudentsController extends Controller
         $student= Enrollment::findOrFail($id)->first();
         $issued_books = Issued::where('enrollment_id' , $student->id)->get();
         $books = Book::pluck('name' , 'id');
-        return view('admin.students.view' , compact(['student' , 'issued_books' , 'books']));
+
+        $fee_manager = FeeManager::where('enrollment_id' , $student->id)->first();
+        $reciepts = Reciept::where('fee_manager_id' , $fee_manager->id)->get();
+
+
+        return view('admin.students.view' , compact(['student' , 'issued_books' , 'books' , 'reciepts']));
     }
 
     /**

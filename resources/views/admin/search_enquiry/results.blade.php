@@ -12,14 +12,14 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h5 class="text-success">Total Results: {{count($enquiries)}}</h5>
+        <h5 class="text-success">Total Results: {{count($enquiries)}} enquirie(s)</h5>
     </div>
 </div>
 
 
 <div class="col-lg-12">
     <table class="table table-hover text-capitalize">
-        <thead>
+        <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>

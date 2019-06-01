@@ -141,20 +141,6 @@
 
 </div>
 
-<div class="row">
-    <div class="col-lg-12">
-        <h5>Payment Reciepts</h5>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-lg-12">
-        <?php $i = 1 ?>
-        @foreach($feeReciepts as $feeReciept)
-        <a href="/reciept/{{$feeReciept->id}}" target="_blank" class="btn btn-primary">Reciept <?php echo $i++ ?></a>
-        @endforeach
-    </div>
-</div>
 
 
 

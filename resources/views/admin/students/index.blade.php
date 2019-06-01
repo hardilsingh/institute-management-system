@@ -51,7 +51,7 @@
 
 <div class="col-lg-12">
     <table class="table table-hover text-capitalize">
-        <thead>
+        <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
@@ -104,9 +104,25 @@
 
                     <!-- <a href="{{route('feemanager.edit' , $student->id)}}" class="btn btn-warning">Manage</a> -->
                 </td>
-                <td class="text-center text-danger" style="font-weight:bolder">{{Carbon\Carbon::parse($student->date_end)->diffInDays()}} days</td>
+                <td class="text-center text-danger" style="font-weight:bolder">
+                    @if($student->completed_1 == 0)
+                    {{Carbon\Carbon::parse($student->date_end)->diffInDays()}} days
+                    @endif
+                    @if($student->completed_1 == 1)
+                    <span style="font-weight:bold; color:green; font-size:22px"><i class="fas fa-check-circle"></i></span>
+                    @endif
+
+                </td>
+
                 @if($student->date_end_2)
-                <td class="text-center text-danger" style="font-weight:bolder">{{Carbon\Carbon::parse($student->date_end_2)->diffInDays()}} days</td>
+                <td class="text-center text-danger" style="font-weight:bolder">
+                    @if($student->completed_2 == 0)
+                    {{Carbon\Carbon::parse($student->date_end_2)->diffInDays()}} days
+                    @endif
+                    @if($student->completed_2 == 1)
+                    <span style="font-weight:bold; color:green; font-size:22px"><i class="fas fa-check-circle"></i></span>
+                    @endif
+                </td>
                 @endif
                 @if(!$student->date_end_2)
                 <td class="text-center text-danger" style="font-weight:bolder">N|A</td>

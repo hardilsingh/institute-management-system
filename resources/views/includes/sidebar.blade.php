@@ -17,25 +17,23 @@
     <div class="sidebar-wrapper">
         <ul class="nav">
             <li>
-                <a href="/admin">
+                <a href="{{route('admin.index')}}">
                     <i class="fas fa-user-shield"></i>
                     <p>Dashboard</p>
                 </a>
             </li>
             <li>
-                <a href="/enquiry">
+                <a href="{{route('enquiry.index')}}">
                     <i class="fas fa-question"></i>
                     <p>Enquiries</p>
                 </a>
             </li>
             <li>
-                <a href="/students">
+                <a href="{{route('students.index')}}">
                     <i class="fas fa-user-graduate"></i>
                     <p>Students</p>
                 </a>
             </li>
-
-
 
             <li>
                 <a href="{{route('course.index')}}">
@@ -44,43 +42,43 @@
                 </a>
             </li>
             <li>
-                <a href="/feemanager">
+                <a href="{{route('feemanager.index')}}">
                     <i class="fas fa-rupee-sign"></i>
                     <p>Fee Manager</p>
                 </a>
             </li>
             <li class="">
-                <a href="/profile">
+                <a href="{{route('profile.index')}}">
                     <i class="fas fa-user-circle"></i>
                     <p>Search Profile</p>
                 </a>
             </li>
             <li class="">
-                <a href="/searchenquiry">
+                <a href="{{route('searchenquiry.index')}}">
                     <i class="nc-icon nc-bank"></i>
                     <p>Search Enquiry</p>
                 </a>
             </li>
             <li class="">
-                <a href="/inventory">
+                <a href="{{route('inventory.index')}}">
                     <i class="fas fa-cogs"></i>
                     <p>Inventory</p>
                 </a>
             </li>
             <li class="">
-                <a href="/docs">
+                <a href="{{route('docs.index')}}">
                     <i class="fas fa-file-alt"></i>
                     <p>Issued Docs</p>
                 </a>
             </li>
             <li class="">
-                <a href="/bulk_sms">
+                <a href="{{route('bulk_sms.index')}}">
                     <i class="fas fa-sms"></i>
                     <p>Bulk SMS</p>
                 </a>
             </li>
             <li class="">
-                <a href="/books">
+                <a href="{{route('books.index')}}">
                     <i class="fas fa-atlas"></i>
                     <p>Books</p>
                 </a>

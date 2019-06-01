@@ -26,7 +26,7 @@
 
 <div class="col-lg-12">
     <table class="table table-hover text-capitalize">
-        <thead>
+        <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
