@@ -71,7 +71,7 @@
                     {!! Form::close() !!}
                     @endif
                     @if($enquiry->enrolled == 1 )
-                    <span style="font-weight:bold">Enrolled</span>
+                    <span style="font-weight:bold; color:green; font-size:22px"><i class="fas fa-check-circle"></i></span>
                     @endif
                 </td>
             </tr>
