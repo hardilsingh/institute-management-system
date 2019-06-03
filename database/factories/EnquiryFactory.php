@@ -17,7 +17,7 @@ $factory->define(Enquiry::class, function (Faker $faker) {
         'address'=>$faker->address,
         'batch_id'=>rand(1 , 4),
         'father_name'=>$faker->name,
-        'gender'=>rand(1 ,2),
+        'gender'=>$faker->gender,
         'email'=>$faker->unique()->safeEmail,
         'school_name'=>'dps',
         'enrolled'=>0,
