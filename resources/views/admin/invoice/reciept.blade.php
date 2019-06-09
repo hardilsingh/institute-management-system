@@ -113,7 +113,7 @@
                             </td>
 
                             <td>
-                                Reciept #: {{$reciept->id}}<br>
+                                Reciept #: {{$reciept->number}}<br>
                                 Created: {{$reciept->created_at}}<br>
                             </td>
                         </tr>
@@ -138,7 +138,7 @@
                                 +91 {{$reciept->student->tel_no}}<br>
                                 Course(s): {{$student->course->name}}
                                 ,
-                                @if($student->course2->name){{$student->course2->name}}
+                                @if($student->course2){{$student->course2->name}}
                                 @endif
                             </td>
                         </tr>
@@ -182,12 +182,7 @@
                 </td>
 
                 <td>
-                    @if($reciept->balance == 0)
-                    0
-                    @endif
-                    @if($reciept->balance !== 0 )
                     ₹ {{$reciept->balance}}
-                    @endif
                 </td>
             </tr>
             <tr class="details">

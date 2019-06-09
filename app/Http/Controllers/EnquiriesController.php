@@ -74,7 +74,9 @@ class EnquiriesController extends Controller
     {
         //
         $enquiry = Enquiry::where('slug' , $slug)->first();
-        return view('admin.enquiries.edit' , compact('enquiry'));
+        $batches = Batch::all();
+        $courses = Course::all();
+        return view('admin.enquiries.edit' , compact(['enquiry' , 'batches' , 'courses']));
     }
 
     /**

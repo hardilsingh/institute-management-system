@@ -124,6 +124,14 @@
                     </div>
                 </div>
             </div>
+             <div class="row" style="margin:35px 0px">
+                <div class="col-lg-3">
+                     <div class="form-group">
+                        <label for="">Date Of Enquiry</label>
+                        {!! Form::date('date', null , ['class'=>'form-control']) !!}
+                    </div>
+                </div>
+            </div>
             <div class="row" style="margin:35px 0px">
                 <div class="col-lg-3">
                     <div class="form-group">

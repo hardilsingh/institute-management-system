@@ -59,14 +59,7 @@
                 </td>
                 <td>₹ {{$fee->course2 ? $fee->course->fee + $fee->course2->fee : $fee->course->fee}}</td>
                 <td>₹ {{$fee->paid_fee}}</td>
-                <td>₹
-                    @if($fee->balance == 0)
-                    0
-                    @endif
-                    @if($fee->balance !== 0 )
-                    {{$fee->balance}}
-                    @endif
-                </td>
+                <td>₹{{$fee->balance}}</td>
                 <td>{{$fee->due_date}}</td>
                 <td style="display:flex; justify-content:space-evenly">
                     <a href="{{route('feemanager.edit' , $fee->slug)}}" class="btn btn-success">Manage</a>

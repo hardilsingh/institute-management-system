@@ -33,6 +33,8 @@ class CreateEnquiry extends FormRequest
             'father_name'=>'required',
             'gender'=>'required',
             'batch_id'=>'required',
+            'course_id'=>'required',
+            'date'=>'required',
         ];
     }
 }

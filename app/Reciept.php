@@ -14,7 +14,8 @@ class Reciept extends Model
         'total_fee',
         'enrollment_id',
         'paid_fee',
-        'due_date'
+        'due_date',
+        'number',
     ];
 
 

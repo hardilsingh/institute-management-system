@@ -41,12 +41,7 @@
                 <td>₹ {{$fee->course->fee}}</td>
                 <td>₹ {{$fee->paid_fee}}</td>
                 <td>
-                    @if($fee->balance == 0)
-                    Nill
-                    @endif
-                    @if($fee->balance !== 0 )
                     ₹ {{$fee->balance}}
-                    @endif
                 </td>
                 <td>{{$fee->due_date}}</td>
                 <td style="display:flex; justify-content:space-evenly">

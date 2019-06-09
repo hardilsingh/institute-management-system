@@ -21,7 +21,7 @@
 
                 <div class="form-group">
                     {!! Form::label('duration' , 'Duration:') !!}
-                    {!! Form::select('duration' , array(''=>'Course Duration' , '30'=>'1 Month' , '45'=>'45 Days' , '90'=>'3 Months' , '180'=>'6 Months') , '' , ['class'=>'form-control']) !!}
+                    {!! Form::select('duration' , array(''=>'Course Duration' , '30'=>'1 Month' , '45'=>'45 Days', '60'=>'2 Months' , '90'=>'3 Months' , '180'=>'6 Months', '120'=>'4 Months', '45'=>'1.5 Months', '240'=>'8 Months', '360'=>'12 Months', '180'=>'6 Months') , '' , ['class'=>'form-control']) !!}
                 </div>
 
 

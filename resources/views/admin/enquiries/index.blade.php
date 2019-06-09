@@ -55,7 +55,6 @@
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Course</th>
-                <th scope="col">Address</th>
                 <th scope="col">Telephone</th>
                 <th scope="col">Follow up</th>
                 <th scope="col">Remarks</th>
@@ -75,12 +74,14 @@
                     @endphp
                 </td>
                 <td>{{$enquiry->name}}</td>
-                <td>{{$enquiry->course->name}}
+                <td>
+                    @if($enquiry->course)
+                    {{$enquiry->course->name}}
+                    @endif
                     @if($enquiry->course2)
                     , {{$enquiry->course2->name}}
                     @endif
                 </td>
-                <td>{{substr($enquiry->address , 0 , 10)}}..</td>
                 <td>{{$enquiry->tel_no}}</td>
                 <td>{{$enquiry->follow_up}}</td>
                 <td>{{substr($enquiry->remarks , 0 , 30)}}</td>
@@ -105,7 +106,9 @@
                     <input type="hidden" name="course_id_2" value="{{$enquiry->course_id_2}}">
                     <input type="hidden" name="date_join" value="{{now()->toDateString()}}">
                     <input type="hidden" name="date_join_2" value="{{now()->toDateString()}}">
+                    @if($enquiry->enrolled == 0)
                     {!! Form::submit('Enroll' , ['class'=>'btn btn-warning']) !!}
+                    @endif
                     {!! Form::close() !!}
                     @endif
                     @if($enquiry->enrolled == 1 )

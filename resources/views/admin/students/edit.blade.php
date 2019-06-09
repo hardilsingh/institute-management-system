@@ -137,27 +137,36 @@
                 </select>
             </div>
         </div>
-
-        <!-- <div class="col-lg-3">
-            <div class="form-group">
-                <label for="">Date of addmission</label>
-                {!! Form::date('date_join' , null , ['class'=>'form-control']) !!}
-            </div>
-        </div> -->
-
-
-
+        
     </div>
     <div class="row" style="margin:35px 0px">
         <div class="col-lg-4">
             <div class="form-group">
-                @if($student->course->centre_id == 2 || $student->course2->centre_id == 2 )
+                @if($student->course->centre_id == 2)
+                <label for="">CDAC registration no: ({{$student->course->name}})</label>
+                {!! Form::text('reg_no' , null , ['class'=>'form-control']) !!}
+                @endif
+                
+                @if($student->course2)
+                @if($student->course2->centre_id == 2)
                 <label for="">CDAC registration no: ({{$student->course2->name}})</label>
                 {!! Form::text('reg_no' , null , ['class'=>'form-control']) !!}
+                @endif
                 @endif
             </div>
         </div>
     </div>
+    
+    <div class="row" style="margin:35px 0px">
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="">Date of addmission</label>
+                {!! Form::date('date' , null , ['class'=>'form-control']) !!}
+            </div>
+        </div>
+    </div>
+    
+    
     <div class="row" style="margin:35px 0px">
         <div class="col-lg-6">
             <div class="form-group">

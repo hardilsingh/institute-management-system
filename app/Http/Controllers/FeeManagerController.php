@@ -89,6 +89,9 @@ class FeeManagerController extends Controller
         $update_fee->update($input);
         $update_fee->sms($update_fee->student->tel_no, $update_fee->paid_fee, $update_fee->balance, $update_fee->due_date);
         $request->session()->flash('fee_updated', 'Fee updated successfully.');
+        
+        
+        $reciept = Reciept::orderBy('created_at', 'desc')->first();
 
         $create_reciept = new Reciept([
             'enrollment_id' => $input['enrollment_id'],
@@ -96,7 +99,8 @@ class FeeManagerController extends Controller
             'balance' => $input['balance'],
             'discount' => $input['discount'],
             'paid_fee' => $input['paid_fee'],
-            'due_date' => $input['due_date']
+            'due_date' => $input['due_date'],
+            'number' => $reciept->number + 1,
         ]);
         $update_fee->feereciept()->save($create_reciept);
 
@@ -117,7 +121,9 @@ class FeeManagerController extends Controller
 
     public function checkdues()
     {
-        $fees = FeeManager::where('balance', '>', '0')->orderBy('created_at', 'DESC')->paginate(10);
+        $fees = FeeManager::where('balance', '>', '0')
+        ->orWhere('discount' , null)
+        ->orderBy('created_at', 'DESC')->paginate(10);
         return view('admin.feemanager.dues', compact('fees'));
     }
 }

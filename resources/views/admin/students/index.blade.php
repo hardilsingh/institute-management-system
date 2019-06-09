@@ -77,7 +77,7 @@
                     @endphp
                 </td>
                 <td>{{$student->name}}</td>
-                <td>{{$student->course->name}}
+                <td style="width:150px">{{$student->course->name}}
                     @if($student->course2)
                     ,{{$student->course2->name}}
                     @endif

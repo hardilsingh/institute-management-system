@@ -25,6 +25,7 @@ class Enquiry extends Model
         'email',
         'school_name',
         'course_id_2',
+        'date',
     ];
 
 
@@ -45,6 +46,11 @@ class Enquiry extends Model
 
     public function course2() {
         return $this->belongsTo('App\Course' , 'course_id_2');
+    }
+    
+    
+    public function batch() {
+        return $this->belongsTo('App\Batch' , 'batch_id');
     }
 
     // public function sms($ph, $name , $follow_up)
