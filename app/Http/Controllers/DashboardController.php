@@ -7,6 +7,7 @@ use App\Enquiry;
 use App\Course;
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 use App\Docs;
+use phpDocumentor\Reflection\Types\Null_;
 
 class DashboardController extends Controller
 {
@@ -24,7 +25,7 @@ class DashboardController extends Controller
     {
 
         $events = [];
-        $data = Enquiry::all();
+        $data = Enquiry::where('follow_up' , '!=' , null)->get();
         if ($data->count()) {
             foreach ($data as $key => $value) {
                 $events[] = Calendar::event(

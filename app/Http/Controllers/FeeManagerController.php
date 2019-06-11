@@ -7,6 +7,8 @@ use App\Enrollment;
 use App\FeeManager;
 use App\Http\Requests\UpdateFeeRequest;
 use App\Reciept;
+use Illuminate\Support\Facades\DB;
+use App\State;
 
 class FeeManagerController extends Controller
 {
@@ -19,7 +21,9 @@ class FeeManagerController extends Controller
     {
         //
         $fees = FeeManager::orderBy('created_at', 'DESC')->paginate(10);
-        return view('admin.feemanager.index', compact('fees'));
+        $total_balance = FeeManager::sum('balance');
+        $total_fee = FeeManager::sum('discounted_fee');
+        return view('admin.feemanager.index', compact(['fees', 'total_balance', 'total_fee']));
     }
 
     /**
@@ -89,8 +93,8 @@ class FeeManagerController extends Controller
         $update_fee->update($input);
         $update_fee->sms($update_fee->student->tel_no, $update_fee->paid_fee, $update_fee->balance, $update_fee->due_date);
         $request->session()->flash('fee_updated', 'Fee updated successfully.');
-        
-        
+
+
         $reciept = Reciept::orderBy('created_at', 'desc')->first();
 
         $create_reciept = new Reciept([
@@ -122,8 +126,41 @@ class FeeManagerController extends Controller
     public function checkdues()
     {
         $fees = FeeManager::where('balance', '>', '0')
-        ->orWhere('discount' , null)
-        ->orderBy('created_at', 'DESC')->paginate(10);
+            ->orWhere('discount', null)
+            ->orderBy('created_at', 'DESC')->paginate(10);
         return view('admin.feemanager.dues', compact('fees'));
+    }
+
+
+    public function search_date(Request $request)
+    {
+        $from = date($request->start_date);
+        $to = date($request->end_date);
+        $fee_date = FeeManager::whereBetween('created_at', [$from, $to])->get();
+        $balance = $fee_date->pluck('balance')->toArray();
+        $discounted_fee = $fee_date->pluck('discounted_fee')->toArray();
+
+        $total_balance = array_sum($balance);
+        $total_fee = array_sum($discounted_fee);
+
+        $collection = $total_fee - $total_balance;
+
+
+        // $states = State::all();
+
+        // foreach ($states as $state) {
+        //     if ($state->start_date !== $request->start_date && $state->end_date !== $request->end_date) {
+        State::create([
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'collection' => $collection,
+            'balance' => $total_balance,
+        ]);
+        // }
+        // if ($state->start_date == $request->start_date && $state->end_date == $request->end_date) {
+        //     $request->session()->flash('exists', 'This state already exits');
+        // }
+
+        return view('admin.feemanager.overview', compact(['total_balance', 'total_fee']));
     }
 }

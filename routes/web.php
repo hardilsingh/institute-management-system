@@ -52,6 +52,8 @@ Route::group(['middleware' => 'admin'], function () {
 
     Route::get('/dues', 'FeeManagerController@checkdues');
 
+    Route::get('/feemanager/search' , 'FeeManagerController@search_date');
+
     Route::resource('/feemanager', 'FeeManagerController');
 
     Route::get('/enquiry/downloadExcel', 'EnquiriesController@export');

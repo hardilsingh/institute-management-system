@@ -57,7 +57,7 @@ class StudentsController extends Controller
 
         $book = Book::findOrFail($input['book_id']);
         $book->update([
-            'stock'=>$book->stock -1,
+            'stock' => $book->stock - 1,
         ]);
 
         return redirect()->back();
@@ -72,15 +72,15 @@ class StudentsController extends Controller
     public function show($id)
     {
         //
-        $student= Enrollment::findOrFail($id);
-        $issued_books = Issued::where('enrollment_id' , $student->id)->get();
-        $books = Book::pluck('name' , 'id');
+        $student = Enrollment::findOrFail($id);
+        $issued_books = Issued::where('enrollment_id', $student->id)->get();
+        $books = Book::pluck('name', 'id');
 
-        $fee_manager = FeeManager::where('enrollment_id' , $student->id)->first();
-        $reciepts = Reciept::where('fee_manager_id' , $fee_manager->id)->get();
+        $fee_manager = FeeManager::where('enrollment_id', $student->id)->first();
+        $reciepts = Reciept::where('fee_manager_id', $fee_manager->id)->get();
 
 
-        return view('admin.students.view' , compact(['student' , 'issued_books' , 'books' , 'reciepts']));
+        return view('admin.students.view', compact(['student', 'issued_books', 'books', 'reciepts']));
     }
 
     /**
@@ -110,37 +110,35 @@ class StudentsController extends Controller
         //
         $input = $request->all();
         $student = Enrollment::findOrFail($id);
-        
-        if($input['course_id'] !== $student->course_id) {
-        $fee_manager = FeeManager::where('enrollment_id', $id)->first();
 
-             $fee_manager->update([
-                    'course_id' => $request->course_id,
-                    'balance' => 0,
-                    'discounted_fee' => null,
+        if ($input['course_id'] !== $student->course_id) {
+            $fee_manager = FeeManager::where('enrollment_id', $id)->first();
+
+            $fee_manager->update([
+                'course_id' => $request->course_id,
+                'balance' => 0,
+                'discounted_fee' => null,
             ]);
         }
-        
-        
-        
+
+
+
         $student->update($request->all());
         $student->save([
-            $student->date_end_2 =  $student->course_id_2  ?   Enrollment::endgame($student->date_join_2, $student->course2->duration): null,
+            $student->date_end_2 =  $student->course_id_2  ?   Enrollment::endgame($student->date_join_2, $student->course2->duration) : null,
         ]);
         if ($request->course_id_2) {
             $fee_manager = FeeManager::where('enrollment_id', $id)->first();
             $newBalance = $student->course2->fee + ($fee_manager->course_id_2 ? $fee_manager->balance - $fee_manager->course2->fee : $fee_manager->balance);
             $total_fee = $student->course2->fee + ($fee_manager->course_id_2 ? $fee_manager->discounted_fee - $fee_manager->course2->fee : $fee_manager->discounted_fee);
-            
-        
-            
-                $fee_manager->update([
-                    'course_id_2' => $request->course_id_2,
-                    'balance' => $newBalance,
-                    'discounted_fee' => $total_fee,
+
+
+
+            $fee_manager->update([
+                'course_id_2' => $request->course_id_2,
+                'balance' => $newBalance,
+                'discounted_fee' => $total_fee,
             ]);
-            
-            
         }
 
         $request->session()->flash('std_updated', 'Student profile updated successfully');

@@ -2,10 +2,50 @@
 @section('content')
 
 <div class="row" style="margin-bottom:30px">
-    <div class="col-lg-12">
+    <div class="col-lg-6">
         <h5 class="display-4">
             Student Fee Manager
         </h5>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-5 col-md-4">
+                        <div class="icon-big text-center icon-warning">
+                            <i class="fas fa-rupee-sign text-success"></i>
+                        </div>
+                    </div>
+                    <div class="col-7 col-md-8">
+                        <div class="numbers">
+                            <p class="card-category">Total Collection</p>
+                            <p class="card-title">{{$total_fee - $total_balance}}
+                                <p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-5 col-md-4">
+                        <div class="icon-big text-center icon-warning">
+                            <i class="fas fa-rupee-sign text-success"></i>
+                        </div>
+                    </div>
+                    <div class="col-7 col-md-8">
+                        <div class="numbers">
+                            <p class="card-category">Total Due</p>
+                            <p class="card-title">{{$total_balance}}
+                                <p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -74,6 +114,37 @@
         </ul>
     </nav>
 </div>
+
+<hr style="margin-top:10px">
+
+<div class="row">
+    <div class="col-lg-4">
+        {!! Form::open([
+
+        'action'=>'FeeManagerController@search_date',
+        'method'=>'GET',
+
+        ]) !!}
+
+        <div class="form-group">
+            {!! Form::label('start_date' ,  'Enter start date:') !!}
+            {!! Form::date('start_date' , null , ['class'=>'form-control']) !!}
+        </div>
+
+        <div class="form-group">
+            {!! Form::label('end_date' ,  'Enter end date:') !!}
+            {!! Form::date('end_date' , null ,  ['class'=>'form-control']) !!}
+        </div>
+
+        <div class="form-group">
+            {!! Form::submit('Search' , ['class'=>'btn btn-success']) !!}
+        </div>
+
+        {!! Form::close() !!}
+    </div>
+</div>
+
+
 
 
 
