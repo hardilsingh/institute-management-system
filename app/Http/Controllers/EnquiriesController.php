@@ -103,6 +103,9 @@ class EnquiriesController extends Controller
     public function destroy($id)
     {
         //
+        Enquiry::findOrFail($id)->delete();
+        session()->flash('enquiry_deleted', 'Enquiry Deleted successfully.');
+        return redirect()->back();
     }
 
     public function export()

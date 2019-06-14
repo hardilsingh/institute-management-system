@@ -40,6 +40,14 @@
 </div>
 @endif
 
+@if(Session::has('enquiry_deleted'))
+<div class="row">
+    <div class="col-lg-5">
+        <div class="alert alert-danger">{{ session('enquiry_deleted') }}</div>
+    </div>
+</div>
+@endif
+
 @if(Session::has('enquiry_created'))
 <div class="row">
     <div class="col-lg-5">
@@ -87,6 +95,12 @@
                 <td>{{substr($enquiry->remarks , 0 , 30)}}</td>
                 <td style="display:flex; justify-content:space-evenly; align-items:center">
                     <a href="{{route('enquiry.edit' , $enquiry->slug)}}" class="btn btn-success">View</a>
+                    {!! Form::model($enquiry, [
+                    'action'=>['EnquiriesController@destroy' , $enquiry->id],
+                    'method'=>'DELETE'
+                    ]) !!}
+                    {!! Form::submit('Delete' , ['class'=>'btn btn-danger']) !!}
+                    {!! Form::close() !!}
                     @if($enquiry->enrolled !== 1 )
                     {!! Form::model($enquiry , [
                     'method'=>'POST',
@@ -112,8 +126,9 @@
                     {!! Form::close() !!}
                     @endif
                     @if($enquiry->enrolled == 1 )
-                    <span style="font-weight:bold; color:green; font-size:22px"><i class="fas fa-check-circle"></i></span>
+                <span style="font-weight:bold; width:93px; text-align:center; color:green; font-size:22px"><i class="fas fa-check-circle"></i></span>
                     @endif
+
                 </td>
             </tr>
             @endforeach
