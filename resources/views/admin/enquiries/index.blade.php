@@ -99,13 +99,15 @@
                     'action'=>['EnquiriesController@destroy' , $enquiry->id],
                     'method'=>'DELETE'
                     ]) !!}
-                    {!! Form::submit('Delete' , ['class'=>'btn btn-danger']) !!}
+                    <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')">
                     {!! Form::close() !!}
                     @if($enquiry->enrolled !== 1 )
                     {!! Form::model($enquiry , [
                     'method'=>'POST',
                     'action'=>'EnrollmentContoller@store'
                     ]) !!}
+
+                    
                     <input type="hidden" name="name" value="{{$enquiry->name}}">
                     <input type="hidden" name="id" value="{{$enquiry->id}}">
                     <input type="hidden" name="father_name" value="{{$enquiry->father_name}}">
@@ -126,7 +128,7 @@
                     {!! Form::close() !!}
                     @endif
                     @if($enquiry->enrolled == 1 )
-                <span style="font-weight:bold; width:93px; text-align:center; color:green; font-size:22px"><i class="fas fa-check-circle"></i></span>
+                    <span style="font-weight:bold; width:93px; text-align:center; color:green; font-size:22px"><i class="fas fa-check-circle"></i></span>
                     @endif
 
                 </td>
@@ -143,3 +145,8 @@
 </div>
 
 @endsection
+
+
+@section('scripts')
+
+@stop
