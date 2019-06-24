@@ -1,14 +1,7 @@
 <?php
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
-use App\Notifications\TestNotify;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StudentsController;
-use Symfony\Component\HttpFoundation\Request;
-use App\Issued;
-use App\Book;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -44,15 +37,22 @@ Route::group(['middleware' => 'admin'], function () {
 
     Route::get('/sendNotification', 'EnrollmentContoller@sendNotification');
 
+
     Route::resource('/enroll', 'EnrollmentContoller');
 
     Route::get('/students/downloadExcel', 'StudentsController@export');
 
+    Route::get('/completed', 'StudentsController@markCompleted');
+
+
     Route::resource('/students', 'StudentsController');
+
+    Route::get('/feemanager/downloadExcel', 'FeeManagerController@export');
+
 
     Route::get('/dues', 'FeeManagerController@checkdues');
 
-    Route::get('/feemanager/search' , 'FeeManagerController@search_date');
+    Route::get('/feemanager/search', 'FeeManagerController@search_date');
 
     Route::resource('/feemanager', 'FeeManagerController');
 

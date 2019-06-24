@@ -50,11 +50,28 @@
 </div>
 
 
-<div class="row" style="margin-bottom:50px">
+<div class="row" style="margin-bottom:50px;">
     <div class="col-lg-12">
-        <a href="/dues" class="btn btn-warning btn-lg">Check Dues</a>
+
+        <div class="col-lg-2">
+            <a href="/dues" class="btn btn-warning btn-lg">Check Dues</a>
+        </div>
+
+
+        @if(count($fees))
+        <div class="col-lg-2" style="margin-bottom:50px">
+            <a href="/feemanager/downloadExcel" class="btn btn-primary btn-lg">Export excel file</a>
+        </div>
+        @endif
+        @if(!count($fees))
+        <div class="col-lg-2" style="margin-bottom:50px">
+            <a href="" class="btn btn-primary btn-lg" disabled>Export excel file</a>
+        </div>
+        @endif
     </div>
 </div>
+
+
 
 @if(Session::has('fee_updated'))
 <div class="row">
@@ -127,13 +144,13 @@
         ]) !!}
 
         <div class="form-group">
-            {!! Form::label('start_date' ,  'Enter start date:') !!}
+            {!! Form::label('start_date' , 'Enter start date:') !!}
             {!! Form::date('start_date' , null , ['class'=>'form-control']) !!}
         </div>
 
         <div class="form-group">
-            {!! Form::label('end_date' ,  'Enter end date:') !!}
-            {!! Form::date('end_date' , null ,  ['class'=>'form-control']) !!}
+            {!! Form::label('end_date' , 'Enter end date:') !!}
+            {!! Form::date('end_date' , null , ['class'=>'form-control']) !!}
         </div>
 
         <div class="form-group">

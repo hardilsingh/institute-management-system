@@ -164,4 +164,15 @@ class StudentsController extends Controller
         $type = 'xls';
         return Excel::download(new StudentsViewExport, 'Students.' . $type);
     }
+
+
+    public function markCompleted(Request $request) {
+        $student = Enrollment::findOrFail($request->id);
+        $student->update([
+            'date_end'=>now()->toDateString(),
+            'completed_1'=> 1,
+        ]);
+
+        return redirect()->back();
+    }
 }

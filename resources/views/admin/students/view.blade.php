@@ -81,11 +81,24 @@
                         </tbody>
                     </table>
                     @if($student->completed_1 !== 1 || $student->completed_2 !== 1)
-                    <a href="{{route('students.edit' , $student->slug)}}"  class="btn btn-primary">Edit</a>
+                    <a href="{{route('students.edit' , $student->slug)}}" class="btn btn-primary">Edit</a>
                     @endif
                     @if($student->completed_1 == 1 && $student->completed_2 == 1)
                     <a href="{{route('students.edit' , $student->slug)}}" disabled class="btn btn-primary">Edit</a>
                     @endif
+                    {!! Form::open( [
+
+                        'method'=>'GET',
+                        'action'=>'StudentsController@markCompleted',
+
+                    ]) !!}
+
+                    {!! Form::hidden('id' , $student->id) !!}
+
+                    {!! Form::submit('Mark as Completed' , ['class'=>'btn btn-warning']) !!}
+
+
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>

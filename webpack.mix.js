@@ -11,15 +11,5 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix.react('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css');
-
-
-
-mix.styles([
-   'resources/assets/css/bootstrap.min.css',
-   // 'resources/assets/css/bootstrap.min.css.map',
-   // 'resources/assets/css/paper-dashboard.css',
-   // 'resources/assets/css/paper-dashboard.css.map',
-   'resources/assets/css/paper-dashboard.min.css',
-], 'public/css/libs.css');

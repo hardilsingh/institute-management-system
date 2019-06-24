@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Enrollment;
 use App\FeeManager;
 use App\Http\Requests\UpdateFeeRequest;
 use App\Reciept;
-use Illuminate\Support\Facades\DB;
 use App\State;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\FeeViewExport;
+
 
 class FeeManagerController extends Controller
 {
@@ -162,5 +163,12 @@ class FeeManagerController extends Controller
         // }
 
         return view('admin.feemanager.overview', compact(['total_balance', 'total_fee']));
+    }
+
+
+    public function export()
+    {
+        $type = 'xls';
+        return Excel::download(new FeeViewExport, 'feelist.'.$type);
     }
 }
