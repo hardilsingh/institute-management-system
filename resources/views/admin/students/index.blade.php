@@ -89,9 +89,10 @@
                 <td style="display:flex; justify-content:space-evenly">
 
                     <a href="{{route('students.show' , $student->id)}}" class="btn btn-warning">View</a>
+		@if($student->feemanager_id->slug) 
 
                     <a href="{{route('feemanager.edit' , $student->feemanager_id->slug)}}" class="btn btn-primary">Fee Manager</a>
-
+                @endif
 
                     <!-- {!! Form::model($student , [
                     'action'=>['StudentsController@destroy' , $student->id],

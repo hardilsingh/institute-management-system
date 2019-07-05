@@ -127,6 +127,8 @@
                 <select name="course_id_2" id="" class="form-control">
                     @if($student->course_id_2)
                     <option value="{{$student->course2->id}}" selected>{{$student->course2->name}}</option>
+			<option value="" selected>Delete Course</option>
+
                     @endif
                     @if(!$student->course_id_2)
                     <option value="" selected>Select course 2</option>

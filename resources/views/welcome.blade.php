@@ -17,11 +17,12 @@
         html,
         body {
             background-color: black;
-            color: #636b6f;
+            color: white;
             font-family: 'Nunito', sans-serif;
             font-weight: 200;
             height: 100vh;
             margin: 0;
+
         }
 
         .full-height {
@@ -53,7 +54,7 @@
         }
 
         .links>a {
-            color: white;
+            color: #fff;
             padding: 0 25px;
             font-size: 13px;
             font-weight: 600;

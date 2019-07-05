@@ -106,8 +106,6 @@
                     'method'=>'POST',
                     'action'=>'EnrollmentContoller@store'
                     ]) !!}
-
-                    
                     <input type="hidden" name="name" value="{{$enquiry->name}}">
                     <input type="hidden" name="id" value="{{$enquiry->id}}">
                     <input type="hidden" name="father_name" value="{{$enquiry->father_name}}">
@@ -123,12 +121,12 @@
                     <input type="hidden" name="date_join" value="{{now()->toDateString()}}">
                     <input type="hidden" name="date_join_2" value="{{now()->toDateString()}}">
                     @if($enquiry->enrolled == 0)
-                    {!! Form::submit('Enroll' , ['class'=>'btn btn-warning']) !!}
+                    {!! Form::submit('Enroll' , ['class'=>'btn btn-warning' , 'onclick'=>'return confirm("Are you sure you want to enroll?")']) !!}
                     @endif
                     {!! Form::close() !!}
                     @endif
                     @if($enquiry->enrolled == 1 )
-                    <span style="font-weight:bold; width:93px; text-align:center; color:green; font-size:22px"><i class="fas fa-check-circle"></i></span>
+                <span style="font-weight:bold; width:93px; text-align:center; color:green; font-size:22px"><i class="fas fa-check-circle"></i></span>
                     @endif
 
                 </td>
@@ -145,8 +143,3 @@
 </div>
 
 @endsection
-
-
-@section('scripts')
-
-@stop

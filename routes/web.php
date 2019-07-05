@@ -33,6 +33,11 @@ Route::group(['middleware' => 'admin'], function () {
 
     Route::get('/reciept/{id}', 'RecieptController@show');
 
+    Route::get('/invoice/downloadExcel', 'RecieptController@export');
+
+
+    Route::resource('/invoice', 'RecieptController');
+
     Route::resource('/course', 'CoursesController');
 
     Route::get('/sendNotification', 'EnrollmentContoller@sendNotification');

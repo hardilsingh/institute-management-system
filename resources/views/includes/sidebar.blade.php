@@ -47,6 +47,12 @@
                     <p>Fee Manager</p>
                 </a>
             </li>
+            <li>
+                <a href="{{route('invoice.index')}}">
+                    <i class="fas fa-receipt"></i>
+                    <p>Reciepts</p>
+                </a>
+            </li>
             <li class="">
                 <a href="{{route('profile.index')}}">
                     <i class="fas fa-user-circle"></i>
