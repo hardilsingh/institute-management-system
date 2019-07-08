@@ -18,16 +18,22 @@
 
 <div class="row" style="margin-bottom:50px;">
     <div class="col-lg-12">
-        @if(count($reciepts))
-        <div class="col-lg-2" style="margin-bottom:50px">
-            <a href="/invoice/downloadExcel" class="btn btn-primary btn-lg">Export excel file</a>
+        <div class="row">
+            @if(count($reciepts))
+            <div class="col-lg-3" style="margin-bottom:50px">
+                <a href="/invoice/downloadExcel" class="btn btn-primary btn-lg">Export excel file</a>
+            </div>
+            @endif
+            @if(!count($reciepts))
+            <div class="col-lg-2" style="margin-bottom:50px">
+                <a href="/invoice/downloadExcel" class="btn btn-primary btn-lg" disabled>Export excel file</a>
+            </div>
+            @endif
+            <div class="col-lg-2" >
+                <a href="/generate" class="btn btn-success btn-lg">Generate Reciept</a>
+            </div>
         </div>
-        @endif
-        @if(!count($reciepts))
-        <div class="col-lg-2" style="margin-bottom:50px">
-            <a href="/invoice/downloadExcel" class="btn btn-primary btn-lg" disabled>Export excel file</a>
-        </div>
-        @endif
+
     </div>
 </div>
 
@@ -42,10 +48,9 @@
                 <th scope="col">Last Transaction</th>
                 <th scope="col">Balance</th>
                 <th scope="col">Due date</th>
-<th scope="col">Generated on</th>
+                <th scope="col">Generated on</th>
                 <th scope="col">Invoice no.</th>
-
-<th scope="col">Action</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -64,23 +69,25 @@
                 <td>₹ {{$reciept->paid_fee}}</td>
                 <td>₹{{$reciept->balance}}</td>
                 <td>{{$reciept->due_date}}</td>
-<td>{{$reciept->created_at->toDateString()}}</td>
-{!! Form::model($reciept , [
+                <td>{{$reciept->created_at->toDateString()}}</td>
+                {!! Form::model($reciept , [
 
                 'method'=>'PATCH',
                 'action'=>['RecieptController@update' , $reciept->id]
 
                 ]) !!}
                 <td>
-                    {!! Form::number('number' , $reciept->number , ['class'=>'form-control' , 'placeholder'=>'Enter Reciept Number' , 'style'=>'width:50%']) !!}
+                    {!! Form::number('number' , $reciept->number , ['class'=>'form-control' , 'placeholder'=>'Enter
+                    Reciept Number' , 'style'=>'width:50%']) !!}
                 </td>
 
                 <td>
-                    {!! Form::submit('Update' , ['class'=>'btn btn-warning' , 'onclick'=>'return confirm("Are you sure you want to update?")']) !!}
- 
-                {!! Form::close() !!}
-<a href="/reciept/{{$reciept->id}}" target="_blank" class="btn btn-success">View</a>
-</td>
+                    {!! Form::submit('Update' , ['class'=>'btn btn-warning' , 'onclick'=>'return confirm("Are you sure
+                    you want to update?")']) !!}
+
+                    {!! Form::close() !!}
+                    <a href="/reciept/{{$reciept->id}}" target="_blank" class="btn btn-success">View</a>
+                </td>
             </tr>
             @endforeach
         </tbody>

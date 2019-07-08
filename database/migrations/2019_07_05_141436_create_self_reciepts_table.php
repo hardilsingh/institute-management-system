@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStatesTable extends Migration
+class CreateSelfRecieptsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateStatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('states', function (Blueprint $table) {
+        Schema::create('self_reciepts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
-            $table->integer('balance')->unsigned();
-            $table->integer('collection')->unsigned();
+            $table->string('name');
+            $table->integer('course_id');
+            $table->integer('paid_fee');
+            $table->integer('balance');
+            $table->date('due_date');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateStatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('states');
+        Schema::dropIfExists('self_reciepts');
     }
 }

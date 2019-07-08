@@ -85,4 +85,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::resource('/bulk_sms', 'BulkSmsController');
 
     Route::resource('/books', 'BooksController');
+
+    Route::resource('/generate', 'GenerateController');
 });
