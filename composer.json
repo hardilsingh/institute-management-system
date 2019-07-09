@@ -14,10 +14,12 @@
         "guzzlehttp/guzzle": "^6.3",
         "jpmurray/laravel-countdown": "^1.3",
         "laravel/framework": "5.8.*",
+        "laravel/telescope": "^2.0",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.8",
         "maatwebsite/excel": "^3.1",
-        "maddhatter/laravel-fullcalendar": "^1.3"
+        "maddhatter/laravel-fullcalendar": "^1.3",
+        "protoqol/prequel": "^0.6.2@beta"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
