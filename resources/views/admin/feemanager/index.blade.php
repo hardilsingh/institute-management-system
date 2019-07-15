@@ -8,6 +8,8 @@
         </h5>
     </div>
     <div class="col-lg-3 col-md-6 col-sm-6">
+        @if(isset($_GET['password']))
+        @if($_GET['password'] == 5875)
         <div class="card card-stats">
             <div class="card-body ">
                 <div class="row">
@@ -26,6 +28,31 @@
                 </div>
             </div>
         </div>
+        @endif
+        @endif
+        @if(!isset($_GET['password']))
+        <div class="card card-stats">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-5 col-md-4">
+                        <div class="icon-big text-center icon-warning">
+                            <i class="fas fa-rupee-sign text-success"></i>
+                        </div>
+                    </div>
+                    <div class="col-7 col-md-8">
+                        <form action="" method="GET">
+                            <div class="form-group">
+                                <label for="password">Enter pin to unlock:</label>
+                                <input name="password" type="number" class="form-control" id="password">
+                                <input type="submit" value="Enter" class="btn btn-small btm-success">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
     </div>
     <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="card card-stats">

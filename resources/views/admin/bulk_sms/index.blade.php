@@ -64,7 +64,7 @@
                     echo $i++
                     @endphp
                 </td>
-                <td>{{$message->msg}}</td>
+                <td title="{{$message->msg}}">{{substr($message->msg , 0 , 60)}}....</td>
                 <td>{{$message->created_at->diffforhumans()}}</td>
 
 

@@ -84,8 +84,8 @@
                     @endphp
                 </td>
                 <td>{{$reciept->name}}</td>
-                <td>{{$reciept->item}}</td>
                 <td>{{$reciept->paid_fee}}</td>
+                <td>{{$reciept->item}}</td>
                 <td>{{$reciept->created_at->toDateString()}}</td>
                 <td>{{$reciept->number}}</td>
                 <td></td>

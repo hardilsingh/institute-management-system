@@ -9,7 +9,7 @@ use App\Reciept;
 use App\State;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\FeeViewExport;
-use App\selfReciepts;
+
 
 class FeeManagerController extends Controller
 {
@@ -23,9 +23,7 @@ class FeeManagerController extends Controller
         //
         $fees = FeeManager::orderBy('created_at', 'DESC')->paginate(10);
         $total_balance = FeeManager::sum('balance');
-        $total_fee1 = Reciept::sum('paid_fee');
-        $total_fee2 = selfReciepts::sum('paid_fee');
-        $total_fee = $total_fee1 + $total_fee2; 
+        $total_fee = FeeManager::sum('discounted_fee');
         return view('admin.feemanager.index', compact(['fees', 'total_balance', 'total_fee']));
     }
 

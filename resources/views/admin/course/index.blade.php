@@ -32,7 +32,7 @@
 @endif
 
 <div class="col-lg-6" style="margin-bottom:50px">
-    <a href="{{route('course.create')}}" class="btn btn-primary btn-lg">Add Course</a>
+    <a href="{{route('course.create')}}" class="btn btn-primary btn-lg"><i class="fas fa-plus" style="margin-right:7px;"></i>Add Course</a>
 
 </div>
 

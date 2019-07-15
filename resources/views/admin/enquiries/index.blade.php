@@ -12,7 +12,7 @@
 
 <div class="row" style="margin-bottom:50px">
     <div class="col-lg-2">
-        <a href="{{route('enquiry.create')}}" class="btn btn-primary btn-lg">Create</a>
+        <a href="{{route('enquiry.create')}}" class="btn btn-primary btn-lg"><i class="fas fa-plus" style="margin-right:7px;"></i>Create</a>
     </div>
     @if(count($enquiries))
     <div class="col-lg-2" style="margin-bottom:50px">
@@ -66,7 +66,8 @@
                 <th scope="col">Telephone</th>
                 <th scope="col">Follow up</th>
                 <th scope="col">Remarks</th>
-                <th scope="col">View</th>
+                <th scope="col">Action</th>
+<th scope="col">Enroll</th>
             </tr>
         </thead>
         <tbody>
@@ -84,53 +85,67 @@
                 <td>{{$enquiry->name}}</td>
                 <td>
                     @if($enquiry->course)
-                    {{$enquiry->course->name}}
+                    {{substr($enquiry->course->name , 0 , 30)}}..
                     @endif
                     @if($enquiry->course2)
-                    , {{$enquiry->course2->name}}
+                    , {{substr($enquiry->course2->name , 0 , 30)}}..
                     @endif
                 </td>
                 <td>{{$enquiry->tel_no}}</td>
                 <td>{{$enquiry->follow_up}}</td>
                 <td>{{substr($enquiry->remarks , 0 , 30)}}</td>
-                <td style="display:flex; justify-content:space-evenly; align-items:center">
-                    <a href="{{route('enquiry.edit' , $enquiry->slug)}}" class="btn btn-success">View</a>
-                    {!! Form::model($enquiry, [
-                    'action'=>['EnquiriesController@destroy' , $enquiry->id],
-                    'method'=>'DELETE'
-                    ]) !!}
-                    <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')">
-                    {!! Form::close() !!}
-                    @if($enquiry->enrolled !== 1 )
-                    {!! Form::model($enquiry , [
-                    'method'=>'POST',
-                    'action'=>'EnrollmentContoller@store'
-                    ]) !!}
-                    <input type="hidden" name="name" value="{{$enquiry->name}}">
-                    <input type="hidden" name="id" value="{{$enquiry->id}}">
-                    <input type="hidden" name="father_name" value="{{$enquiry->father_name}}">
-                    <input type="hidden" name="tel_no" value="{{$enquiry->tel_no}}">
-                    <input type="hidden" name="gender" value="{{$enquiry->gender}}">
-                    <input type="hidden" name="email" value="{{$enquiry->email}}">
-                    <input type="hidden" name="edu" value="{{$enquiry->edu}}">
-                    <input type="hidden" name="address" value="{{$enquiry->address}}">
-                    <input type="hidden" name="school_name" value="{{$enquiry->school_name}}">
-                    <input type="hidden" name="batch_id" value="{{$enquiry->batch_id}}">
-                    <input type="hidden" name="course_id" value="{{$enquiry->course_id}}">
-                    <input type="hidden" name="course_id_2" value="{{$enquiry->course_id_2}}">
-                    <input type="hidden" name="date_join" value="{{now()->toDateString()}}">
-                    <input type="hidden" name="date_join_2" value="{{now()->toDateString()}}">
-                    @if($enquiry->enrolled == 0)
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Action
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a href="{{route('enquiry.edit' , $enquiry->slug)}}" class="btn btn-success dropdown-item">View</a>
+                            {!! Form::model($enquiry, [
+                            'action'=>['EnquiriesController@destroy' , $enquiry->id],
+                            'method'=>'DELETE',
+
+                            ]) !!}
+                            <input type="submit" value="Delete" class="btn btn-danger dropdown-item" onclick="return confirm('Are you sure you want to delete?')">
+                            {!! Form::close() !!}
+                            @if($enquiry->enrolled !== 1 )
+                            {!! Form::model($enquiry , [
+                            'method'=>'POST',
+                            'action'=>'EnrollmentContoller@store'
+                            ]) !!}
+                            <input type="hidden" name="name" value="{{$enquiry->name}}">
+                            <input type="hidden" name="id" value="{{$enquiry->id}}">
+                            <input type="hidden" name="father_name" value="{{$enquiry->father_name}}">
+                            <input type="hidden" name="tel_no" value="{{$enquiry->tel_no}}">
+                            <input type="hidden" name="gender" value="{{$enquiry->gender}}">
+                            <input type="hidden" name="email" value="{{$enquiry->email}}">
+                            <input type="hidden" name="edu" value="{{$enquiry->edu}}">
+                            <input type="hidden" name="address" value="{{$enquiry->address}}">
+                            <input type="hidden" name="school_name" value="{{$enquiry->school_name}}">
+                            <input type="hidden" name="batch_id" value="{{$enquiry->batch_id}}">
+                            <input type="hidden" name="course_id" value="{{$enquiry->course_id}}">
+                            <input type="hidden" name="course_id_2" value="{{$enquiry->course_id_2}}">
+                            <input type="hidden" name="date_join" value="{{now()->toDateString()}}">
+                            <input type="hidden" name="date_join_2" value="{{now()->toDateString()}}">
+                        </div>
+                    </div>
+                </td>
+                @if($enquiry->enrolled == 0)
+                <td class="text-center">
+
                     {!! Form::submit('Enroll' , ['class'=>'btn btn-warning' , 'onclick'=>'return confirm("Are you sure you want to enroll?")']) !!}
                     @endif
                     {!! Form::close() !!}
-                    @endif
-                    @if($enquiry->enrolled == 1 )
-                <span style="font-weight:bold; width:93px; text-align:center; color:green; font-size:22px"><i class="fas fa-check-circle"></i></span>
-                    @endif
 
                 </td>
-            </tr>
+                @endif
+                @if($enquiry->enrolled == 1 )
+                <td>
+
+                    <p class="text-center" style="font-size:22px; color:green"><i class="fas fa-check-circle"></i></p>
+
+                </td>
+                @endif            </tr>
             @endforeach
             @endif
         </tbody>

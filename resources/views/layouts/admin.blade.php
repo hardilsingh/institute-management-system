@@ -17,6 +17,11 @@
 </head>
 
 <body>
+<style>
+    .btn {
+        border-radius: 0;
+    }
+</style>
     <div class="wrapper ">
         @include('includes.sidebar')
         <div class="main-panel">

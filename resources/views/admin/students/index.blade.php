@@ -84,30 +84,44 @@
                 </td>
 
                 <td>{{$student->batch->from}}:00 - {{$student->batch->to}}:00</td>
-                <td>{{$student->tel_no}}</td>
+                <td>+91 {{$student->tel_no}}</td>
                 <td>{{$student->reg_no}}</td>
-                <td style="display:flex; justify-content:space-evenly">
-
-                    <a href="{{route('students.show' , $student->id)}}" class="btn btn-warning">View</a>
+                <td>
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Action
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+<a href="{{route('students.show' , $student->id)}}" class="btn btn-warning dropdown-item">View</a>
 		@if($student->feemanager_id->slug) 
 
-                    <a href="{{route('feemanager.edit' , $student->feemanager_id->slug)}}" class="btn btn-primary">Fee Manager</a>
+                    <a href="{{route('feemanager.edit' , $student->feemanager_id->slug)}}" class="btn btn-primary dropdown-item">Fee Manager</a>
                 @endif
 
-                    <!-- {!! Form::model($student , [
+                     {!! Form::model($student , [
                     'action'=>['StudentsController@destroy' , $student->id],
                     'method'=>'DELETE',
                     ]) !!}
 
-                    {!! Form::submit('Delete' , ['class'=>'btn btn-danger']) !!}
+                    {!! Form::submit('Delete' , ['class'=>'btn btn-danger dropdown-item']) !!}
 
-                    {!! Form::close() !!} -->
+                    {!! Form::close() !!} 
+
+
+      </div>
+</div>
+
+
+                    
 
                     <!-- <a href="{{route('feemanager.edit' , $student->id)}}" class="btn btn-warning">Manage</a> -->
                 </td>
-                <td class="text-center text-danger" style="font-weight:bolder">
+                <td class="text-center">
                     @if($student->completed_1 == 0)
-                    {{Carbon\Carbon::parse($student->date_end)->diffInDays()}} days
+<span style="width:80%; padding:8px 2px; color:white; background-color:black; display:block">
+{{Carbon\Carbon::parse($student->date_end)->diffInDays()}} days
+</span>
+                    
                     @endif
                     @if($student->completed_1 == 1)
                     <span style="font-weight:bold; color:green; font-size:22px"><i class="fas fa-check-circle"></i></span>
@@ -116,9 +130,12 @@
                 </td>
 
                 @if($student->date_end_2)
-                <td class="text-center text-danger" style="font-weight:bolder">
+                <td class="text-center text-danger">
                     @if($student->completed_2 == 0)
-                    {{Carbon\Carbon::parse($student->date_end_2)->diffInDays()}} days
+<span style="width:80%; padding:8px 2px; color:white; background-color:black; display:block">
+{{Carbon\Carbon::parse($student->date_end_2)->diffInDays()}} days
+</span>
+
                     @endif
                     @if($student->completed_2 == 1)
                     <span style="font-weight:bold; color:green; font-size:22px"><i class="fas fa-check-circle"></i></span>
@@ -126,7 +143,7 @@
                 </td>
                 @endif
                 @if(!$student->date_end_2)
-                <td class="text-center text-danger" style="font-weight:bolder">N|A</td>
+                <td class="text-center text-danger"><i class="fas fa-times"></i></td>
                 @endif
             </tr>
             @endforeach
